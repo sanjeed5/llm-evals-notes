@@ -1,0 +1,57 @@
+name: Scrape on urls.txt change
+
+on:
+  push:
+    paths:
+      - 'urls.txt'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: scrape-on-urls-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v3
+        with:
+          python-version: '3.12'
+
+      - name: Sync dependencies (frozen)
+        run: uv sync --frozen
+
+      - name: Run scraper
+        env:
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+        run: uv run scripts/scrape.py refresh
+
+      - name: Create Pull Request with scraped changes
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: |
+            content/**
+            data/catalog.json
+          branch: ci/scrape-${{ github.ref_name }}
+          base: ${{ github.ref_name }}
+          commit-message: 'chore(ci): scraped content update for urls.txt change'
+          title: 'chore(ci): scraped content update for urls.txt change'
+          body: |
+            This PR was automatically generated because `urls.txt` changed.
+
+            It runs `uv run scripts/scrape.py refresh` and includes updates to:
+            - `content/**`
+            - `data/catalog.json`
+
+            Secrets used: `FIRECRAWL_API_KEY`.
+          delete-branch: true
+

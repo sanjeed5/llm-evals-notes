@@ -1,0 +1,116 @@
+{
+  "items": [
+    {
+      "title": "Your AI Product Needs Evals – Hamel's Blog",
+      "path": "content/your-ai-product-needs-evals-hamel-s-blog.md",
+      "url": "https://hamel.dev/blog/posts/evals/index.html",
+      "hash": "aca6e857d2175cd50a5ad6d775b5e23229802cd7de501d53b6ad404b8a9be780",
+      "fetched_at": "2025-08-08T07:18:51.942947+00:00"
+    },
+    {
+      "title": "AlignEval: Building an App to Make Evals Easy, Fun, and Automated",
+      "path": "content/aligneval-building-an-app-to-make-evals-easy-fun-and-automated.md",
+      "url": "https://eugeneyan.com/writing/aligneval/",
+      "hash": "93c32d6a5e2e9ce7b6a8a9ccf6a290b126d70fda475697715357336029ecaf98",
+      "fetched_at": "2025-08-08T07:18:38.722262+00:00"
+    },
+    {
+      "title": "An LLM-as-Judge Won't Save The Product—Fixing Your Process Will",
+      "path": "content/an-llm-as-judge-won-t-save-the-product-fixing-your-process-will.md",
+      "url": "https://eugeneyan.com/writing/eval-process/",
+      "hash": "20800518f5b4f1ede71855355255b0dbb496e5d39d8a4a8888453d88e770fc46",
+      "fetched_at": "2025-08-08T07:18:41.385865+00:00"
+    },
+    {
+      "title": "Evaluating Long-Context Question & Answer Systems",
+      "path": "content/evaluating-long-context-question-answer-systems.md",
+      "url": "https://eugeneyan.com/writing/qa-evals/",
+      "hash": "13820286379d37f4d7793dd72710c4d5331e8e186d88db3e8fd19a40077cb2b7",
+      "fetched_at": "2025-08-08T07:18:44.411315+00:00"
+    },
+    {
+      "title": "Frequently Asked Questions (And Answers) About AI Evals – Hamel’s Blog",
+      "path": "content/frequently-asked-questions-and-answers-about-ai-evals-hamels-blog.md",
+      "url": "https://hamel.dev/blog/posts/evals-faq/",
+      "hash": "0ced771feff396e9626521ea46d7f3ca28ae3f44870b6853267acd173d394e4c",
+      "fetched_at": "2025-08-08T07:18:49.938322+00:00"
+    },
+    {
+      "title": "A Field Guide to Rapidly Improving AI Products – Hamel’s Blog",
+      "path": "content/a-field-guide-to-rapidly-improving-ai-products-hamels-blog.md",
+      "url": "https://hamel.dev/blog/posts/field-guide/index.html",
+      "hash": "bd7dc81aae1f4885bd1f02276779374bf7b63ad0c87363574ed6292307929d91",
+      "fetched_at": "2025-08-08T07:18:54.144477+00:00"
+    },
+    {
+      "title": "Creating a LLM-as-a-Judge That Drives Business Results – Hamel's Blog",
+      "path": "content/creating-a-llm-as-a-judge-that-drives-business-results-hamel-s-blog.md",
+      "url": "https://hamel.dev/blog/posts/llm-judge/index.html",
+      "hash": "da1ccbd68d8f47a842f949d1c1e8fe29c06f92873953b35aeb82aa253a56756a",
+      "fetched_at": "2025-08-08T07:18:57.622826+00:00"
+    },
+    {
+      "title": "There Are Only 6 RAG Evals - Jason Liu",
+      "path": "content/there-are-only-6-rag-evals-jason-liu.md",
+      "url": "https://jxnl.co/writing/2025/05/19/there-are-only-6-rag-evals/",
+      "hash": "d8349dc18ef31700347a2fa453536fa742c84d42a6e8f379b6d1cb0a703a3442",
+      "fetched_at": "2025-08-08T07:19:02.414614+00:00"
+    },
+    {
+      "title": "AlignEval: Building an App to Make Evals Easy, Fun, and Automated",
+      "path": "content/eugeneyan-com-aligneval-building-an-app-to-make-evals-easy-fun-and-automated.md",
+      "url": "https://eugeneyan.com/writing/aligneval",
+      "hash": "fe73c54e06f1892ac21d0984cf73b37a9a7cf63fba950c8f6eeea73ec55ecd13",
+      "fetched_at": "2025-08-08T08:06:37.771632+00:00"
+    },
+    {
+      "title": "An LLM-as-Judge Won't Save The Product—Fixing Your Process Will",
+      "path": "content/eugeneyan-com-an-llm-as-judge-won-t-save-the-product-fixing-your-process-will.md",
+      "url": "https://eugeneyan.com/writing/eval-process",
+      "hash": "20800518f5b4f1ede71855355255b0dbb496e5d39d8a4a8888453d88e770fc46",
+      "fetched_at": "2025-08-08T08:06:40.723584+00:00"
+    },
+    {
+      "title": "Evaluating Long-Context Question & Answer Systems",
+      "path": "content/eugeneyan-com-evaluating-long-context-question-answer-systems.md",
+      "url": "https://eugeneyan.com/writing/qa-evals",
+      "hash": "13820286379d37f4d7793dd72710c4d5331e8e186d88db3e8fd19a40077cb2b7",
+      "fetched_at": "2025-08-08T08:06:43.184927+00:00"
+    },
+    {
+      "title": "Your AI Product Needs Evals – Hamel's Blog",
+      "path": "content/hamel-dev-your-ai-product-needs-evals-hamel-s-blog.md",
+      "url": "https://hamel.dev/blog/posts/evals",
+      "hash": "1a40eea4ccddaad533f8238807a7852d8f9fd129d057487752661d989801ef78",
+      "fetched_at": "2025-08-08T08:06:45.171925+00:00"
+    },
+    {
+      "title": "Frequently Asked Questions (And Answers) About AI Evals – Hamel’s Blog",
+      "path": "content/hamel-dev-frequently-asked-questions-and-answers-about-ai-evals-hamels-blog.md",
+      "url": "https://hamel.dev/blog/posts/evals-faq",
+      "hash": "0ced771feff396e9626521ea46d7f3ca28ae3f44870b6853267acd173d394e4c",
+      "fetched_at": "2025-08-08T08:07:02.550956+00:00"
+    },
+    {
+      "title": "A Field Guide to Rapidly Improving AI Products – Hamel’s Blog",
+      "path": "content/hamel-dev-a-field-guide-to-rapidly-improving-ai-products-hamels-blog.md",
+      "url": "https://hamel.dev/blog/posts/field-guide",
+      "hash": "b15f5443fac9d3493e9708f86dd898d879377bd9d80833a99bb45b75a92106b4",
+      "fetched_at": "2025-08-08T08:07:05.395544+00:00"
+    },
+    {
+      "title": "Creating a LLM-as-a-Judge That Drives Business Results – Hamel's Blog",
+      "path": "content/hamel-dev-creating-a-llm-as-a-judge-that-drives-business-results-hamel-s-blog.md",
+      "url": "https://hamel.dev/blog/posts/llm-judge",
+      "hash": "42199732e9a96e07091e38d7af1816441bb99ecd27543aced2e4765d1dab48ef",
+      "fetched_at": "2025-08-08T08:07:08.410376+00:00"
+    },
+    {
+      "title": "There Are Only 6 RAG Evals - Jason Liu",
+      "path": "content/jxnl-co-there-are-only-6-rag-evals-jason-liu.md",
+      "url": "https://jxnl.co/writing/2025/05/19/there-are-only-6-rag-evals",
+      "hash": "d8349dc18ef31700347a2fa453536fa742c84d42a6e8f379b6d1cb0a703a3442",
+      "fetched_at": "2025-08-08T08:07:13.199598+00:00"
+    }
+  ]
+}
