@@ -58,59 +58,59 @@
     },
     {
       "title": "AlignEval: Building an App to Make Evals Easy, Fun, and Automated",
-      "path": "content/eugeneyan-com-aligneval-building-an-app-to-make-evals-easy-fun-and-automated.md",
+      "path": "content/eugeneyan-com-aligneval-building-an-app-to-make-evals-easy-fun-and-automated-cca419.md",
       "url": "https://eugeneyan.com/writing/aligneval",
-      "hash": "fe73c54e06f1892ac21d0984cf73b37a9a7cf63fba950c8f6eeea73ec55ecd13",
-      "fetched_at": "2025-08-08T08:06:37.771632+00:00"
+      "hash": "cca419475f29509738e852d8119682710af159ddc39203051858829b40b1416a",
+      "fetched_at": "2025-08-08T08:54:56.497885+00:00"
     },
     {
       "title": "An LLM-as-Judge Won't Save The Product—Fixing Your Process Will",
-      "path": "content/eugeneyan-com-an-llm-as-judge-won-t-save-the-product-fixing-your-process-will.md",
+      "path": "content/eugeneyan-com-an-llm-as-judge-won-t-save-the-product-fixing-your-process-will-dc8c74.md",
       "url": "https://eugeneyan.com/writing/eval-process",
-      "hash": "20800518f5b4f1ede71855355255b0dbb496e5d39d8a4a8888453d88e770fc46",
-      "fetched_at": "2025-08-08T08:06:40.723584+00:00"
+      "hash": "dc8c74daeb91e084dc9575324586f0fa26daa9d8e7b8c35a89c2de8f03e20239",
+      "fetched_at": "2025-08-08T08:54:57.883221+00:00"
     },
     {
       "title": "Evaluating Long-Context Question & Answer Systems",
-      "path": "content/eugeneyan-com-evaluating-long-context-question-answer-systems.md",
+      "path": "content/eugeneyan-com-evaluating-long-context-question-answer-systems-6c00c6.md",
       "url": "https://eugeneyan.com/writing/qa-evals",
-      "hash": "13820286379d37f4d7793dd72710c4d5331e8e186d88db3e8fd19a40077cb2b7",
-      "fetched_at": "2025-08-08T08:06:43.184927+00:00"
+      "hash": "6c00c64669da2ded68652b7f6f10bce3c82c6edd754f5b54a8e4715f684f5606",
+      "fetched_at": "2025-08-08T08:54:59.327071+00:00"
     },
     {
       "title": "Your AI Product Needs Evals – Hamel's Blog",
       "path": "content/hamel-dev-your-ai-product-needs-evals-hamel-s-blog.md",
       "url": "https://hamel.dev/blog/posts/evals",
       "hash": "1a40eea4ccddaad533f8238807a7852d8f9fd129d057487752661d989801ef78",
-      "fetched_at": "2025-08-08T08:06:45.171925+00:00"
+      "fetched_at": "2025-08-08T08:55:01.759847+00:00"
     },
     {
       "title": "Frequently Asked Questions (And Answers) About AI Evals – Hamel’s Blog",
-      "path": "content/hamel-dev-frequently-asked-questions-and-answers-about-ai-evals-hamels-blog.md",
+      "path": "content/hamel-dev-frequently-asked-questions-and-answers-about-ai-evals-hamels-blog-0a0808.md",
       "url": "https://hamel.dev/blog/posts/evals-faq",
-      "hash": "0ced771feff396e9626521ea46d7f3ca28ae3f44870b6853267acd173d394e4c",
-      "fetched_at": "2025-08-08T08:07:02.550956+00:00"
+      "hash": "0a08084fc05cfeed9c91df1900e7fb25b262ef07bff7c1dfc9de71838289ba67",
+      "fetched_at": "2025-08-08T08:55:06.657374+00:00"
     },
     {
       "title": "A Field Guide to Rapidly Improving AI Products – Hamel’s Blog",
       "path": "content/hamel-dev-a-field-guide-to-rapidly-improving-ai-products-hamels-blog.md",
       "url": "https://hamel.dev/blog/posts/field-guide",
       "hash": "b15f5443fac9d3493e9708f86dd898d879377bd9d80833a99bb45b75a92106b4",
-      "fetched_at": "2025-08-08T08:07:05.395544+00:00"
+      "fetched_at": "2025-08-08T08:55:09.503769+00:00"
     },
     {
       "title": "Creating a LLM-as-a-Judge That Drives Business Results – Hamel's Blog",
-      "path": "content/hamel-dev-creating-a-llm-as-a-judge-that-drives-business-results-hamel-s-blog.md",
+      "path": "content/hamel-dev-creating-a-llm-as-a-judge-that-drives-business-results-hamel-s-blog-ef60d7.md",
       "url": "https://hamel.dev/blog/posts/llm-judge",
-      "hash": "42199732e9a96e07091e38d7af1816441bb99ecd27543aced2e4765d1dab48ef",
-      "fetched_at": "2025-08-08T08:07:08.410376+00:00"
+      "hash": "ef60d76f1eb87b3a5ceb421270ce849e9fb5b349f0e39cb20ac0fbbbf7834551",
+      "fetched_at": "2025-08-08T08:55:12.437827+00:00"
     },
     {
       "title": "There Are Only 6 RAG Evals - Jason Liu",
       "path": "content/jxnl-co-there-are-only-6-rag-evals-jason-liu.md",
       "url": "https://jxnl.co/writing/2025/05/19/there-are-only-6-rag-evals",
       "hash": "d8349dc18ef31700347a2fa453536fa742c84d42a6e8f379b6d1cb0a703a3442",
-      "fetched_at": "2025-08-08T08:07:13.199598+00:00"
+      "fetched_at": "2025-08-08T08:55:21.609167+00:00"
     }
   ]
 }
