@@ -43,11 +43,34 @@ Goal: Collect LLM evals URLs, scrape to clean Markdown with metadata, and mainta
 
 ## Optional (after MVP)
 - [x] URL normalization/deduping for `urls.txt`
-- [ ] `data/summary.md` linking all docs
 
 ## Later
 - [ ] Minimal MCP server exposing `list_docs`, `get_doc`, `search`
-- [ ] CI to auto-refresh on `urls.txt` changes
+
+## Phase 4 — CI (Scrape on urls.txt changes)
+- [x] Trigger
+  - [x] Run on push when only `urls.txt` changes
+  - [x] Allow manual dispatch
+- [x] Runtime
+  - [x] Use Python `3.12` (respect `.python-version`)
+  - [x] Use `uv` for dependency install and run
+- [x] Execution
+  - [x] Run `uv sync --frozen`
+  - [x] Run `uv run scripts/scrape.py refresh` with `FIRECRAWL_API_KEY` from GitHub Actions secrets
+- [x] Output handling
+  - [x] Open a PR with any changes in `content/**` and `data/catalog.json`
+  - [x] Use a dedicated CI branch per run, auto-delete after merge
+  - [x] Do not include `logs/` or unrelated files in the PR
+- [x] Permissions & safety
+  - [x] `contents: write`, `pull-requests: write`
+  - [x] Concurrency to avoid overlapping runs per ref
+  - [x] No schedule for now
+
+### Acceptance criteria (CI)
+- [x] A push that changes `urls.txt` triggers the workflow
+- [x] If scraping produces changes, a PR is created with only `content/**` and `data/catalog.json`
+- [x] If nothing changes, no PR is opened
+- [x] Workflow uses Python 3.12 and `uv` and reads `FIRECRAWL_API_KEY` from repo secrets
 
 ## Acceptance criteria
 - [x] `uv run scripts/scrape.py refresh` creates Markdown files in `content/` with frontmatter
