@@ -37,6 +37,9 @@ class ScrapeResult:
 
 
 def configure_logging() -> None:
+    """
+    Configure logging to output messages to both the console and a log file in the logs directory.
+    """
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
         level=logging.INFO,
@@ -50,10 +53,19 @@ def configure_logging() -> None:
 
 def read_env() -> None:
     # Load .env if present so FIRECRAWL_API_KEY can be set locally
+    """
+    Loads environment variables from a `.env` file located at the project root, enabling local configuration such as the Firecrawl API key.
+    """
     load_dotenv(ROOT / ".env")
 
 
 def load_urls() -> List[str]:
+    """
+    Load and return a list of URLs from the `urls.txt` file.
+    
+    Returns:
+        List of non-empty, stripped URLs. Returns an empty list if the file does not exist.
+    """
     if not URLS_FILE.exists():
         return []
     with URLS_FILE.open("r", encoding="utf-8") as f:
@@ -61,11 +73,26 @@ def load_urls() -> List[str]:
 
 
 def save_urls(urls: List[str]) -> None:
+    """
+    Write a sorted, deduplicated list of URLs to the `urls.txt` file.
+    
+    Parameters:
+        urls (List[str]): List of URLs to save.
+    """
     lines = "\n".join(sorted(set(urls))) + "\n" if urls else ""
     URLS_FILE.write_text(lines, encoding="utf-8")
 
 
 def normalize_url(url: str) -> str:
+    """
+    Normalize a URL by enforcing HTTPS scheme, lowercasing scheme and domain, removing default ports, fragments, redundant slashes, trailing slashes (except for root), and index.html/htm suffixes.
+    
+    Parameters:
+        url (str): The URL to normalize.
+    
+    Returns:
+        str: The normalized URL.
+    """
     url = url.strip()
     if not url:
         return url
@@ -93,10 +120,24 @@ def normalize_url(url: str) -> str:
 
 
 def compute_hash(markdown: str) -> str:
+    """
+    Compute the SHA-256 hash of a Markdown string.
+    
+    Parameters:
+        markdown (str): The Markdown content to hash.
+    
+    Returns:
+        str: The hexadecimal SHA-256 hash of the input Markdown.
+    """
     return hashlib.sha256(markdown.encode("utf-8")).hexdigest()
 
 
 def ensure_catalog() -> Dict[str, Dict]:
+    """
+    Ensures the catalog file exists and returns its contents as a dictionary.
+    
+    If the catalog file is missing or contains invalid JSON, returns a new catalog dictionary with an empty "items" list.
+    """
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     if CATALOG_FILE.exists():
         try:
@@ -107,20 +148,57 @@ def ensure_catalog() -> Dict[str, Dict]:
 
 
 def write_catalog(catalog: Dict[str, Dict]) -> None:
+    """
+    Write the catalog dictionary to the catalog JSON file in the data directory as pretty-printed UTF-8 JSON.
+    """
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     CATALOG_FILE.write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def safe_slug(text: str, fallback: str) -> str:
+    """
+    Generate a URL-safe slug from the given text, using a fallback or a hash if necessary.
+    
+    If `text` is empty or produces an empty slug, the function uses the `fallback` string. If both result in an empty slug, a SHA-1 hash of the fallback is used (truncated to 10 characters).
+    
+    Parameters:
+        text (str): The primary string to slugify.
+        fallback (str): The fallback string to use if `text` is empty or cannot be slugified.
+    
+    Returns:
+        str: A URL-safe slug derived from `text`, `fallback`, or a hash of `fallback`.
+    """
     base = slugify(text) if text else slugify(fallback)
     return base or slugify(fallback) or hashlib.sha1(fallback.encode()).hexdigest()[:10]
 
 
 def extract_domain(url: str) -> str:
+    """
+    Extracts and returns the domain portion from a given URL string.
+    
+    Parameters:
+        url (str): The URL from which to extract the domain.
+    
+    Returns:
+        str: The domain name extracted from the URL.
+    """
     return re.sub(r"^https?://([^/]+).*$", r"\1", url)
 
 
 def generate_slug(title: str, url: str, content_hash: Optional[str] = None) -> str:
+    """
+    Generate a filename slug based on the URL's domain and the provided title or last path segment.
+    
+    If the title is empty, uses the last segment of the URL path or the domain. Falls back to a SHA-1 hash if no slug can be generated. Optionally accepts a content hash for collision avoidance, but does not append it unless needed elsewhere.
+    
+    Parameters:
+        title (str): The page title to use for slug generation.
+        url (str): The source URL for extracting the domain and path.
+        content_hash (Optional[str]): Optional content hash for collision avoidance.
+    
+    Returns:
+        str: A slug suitable for use as a filename.
+    """
     domain = extract_domain(url)
     title_slug = slugify(title) if title else ""
     # derive from last path segment if title empty
@@ -139,6 +217,15 @@ def generate_slug(title: str, url: str, content_hash: Optional[str] = None) -> s
 
 
 def frontmatter_yaml(meta: Dict[str, str]) -> str:
+    """
+    Generate a YAML frontmatter string from a metadata dictionary.
+    
+    Parameters:
+        meta (Dict[str, str]): Metadata to include in the YAML frontmatter.
+    
+    Returns:
+        str: A string containing the YAML frontmatter delimited by '---' lines.
+    """
     import yaml  # local import to keep import list tidy
 
     return "---\n" + yaml.safe_dump(meta, sort_keys=False).strip() + "\n---\n\n"
@@ -146,6 +233,18 @@ def frontmatter_yaml(meta: Dict[str, str]) -> str:
 
 def scrape_once(app: FirecrawlApp, url: str, timeout: int) -> ScrapeResult:
     # Firecrawl SDK (>=2.x) returns a ScrapeResponse pydantic model with attributes
+    """
+    Scrapes a single URL using the Firecrawl API and returns the result as a ScrapeResult.
+    
+    Attempts to extract Markdown content, title, source URL, HTTP status code, and domain from the response. Falls back to metadata or input values if necessary.
+    
+    Parameters:
+        url (str): The URL to scrape.
+        timeout (int): Timeout in seconds for the scrape operation.
+    
+    Returns:
+        ScrapeResult: An object containing the scraped Markdown, title, source URL, domain, and status code.
+    """
     timeout_ms = int(timeout * 1000) if timeout else None
     resp = app.scrape_url(url, formats=["markdown"], timeout=timeout_ms)
 
@@ -186,6 +285,17 @@ def scrape_once(app: FirecrawlApp, url: str, timeout: int) -> ScrapeResult:
 
 
 def write_markdown_file(slug: str, result: ScrapeResult, content_hash: str) -> Path:
+    """
+    Write a Markdown file with YAML frontmatter and scraped content to the content directory.
+    
+    Parameters:
+    	slug (str): The filename slug for the Markdown file.
+    	result (ScrapeResult): The result of the scrape operation containing metadata and Markdown content.
+    	content_hash (str): The SHA-256 hash of the Markdown content.
+    
+    Returns:
+    	Path: The path to the written Markdown file.
+    """
     CONTENT_DIR.mkdir(parents=True, exist_ok=True)
     meta = {
         "title": result.title,
@@ -201,6 +311,11 @@ def write_markdown_file(slug: str, result: ScrapeResult, content_hash: str) -> P
 
 
 def upsert_catalog_item(catalog: Dict[str, Dict], *, title: str, path: Path, url: str, content_hash: str) -> None:
+    """
+    Insert or update an item in the catalog's "items" list with the given title, relative file path, URL, content hash, and fetch timestamp.
+    
+    If an item with the same URL or file path exists, its metadata is updated; otherwise, a new item is appended.
+    """
     items: List[Dict] = catalog.setdefault("items", [])
     # find by url if present; else by path
     existing = next((it for it in items if it.get("url") == url or it.get("path") == str(path)), None)
@@ -222,6 +337,11 @@ def upsert_catalog_item(catalog: Dict[str, Dict], *, title: str, path: Path, url
 
 
 def refresh_all(urls: List[str], *, force: bool, timeout: int) -> None:
+    """
+    Scrapes and updates Markdown files for a list of URLs, maintaining idempotency and catalog consistency.
+    
+    For each URL, normalizes and fetches content using the Firecrawl API with retries and exponential backoff. Skips writing files if content is unchanged unless forced. Handles slug generation and collision avoidance, writes Markdown files with metadata, and updates the catalog JSON. Logs progress and errors. Requires the FIRECRAWL_API_KEY environment variable.
+    """
     api_key = os.environ.get("FIRECRAWL_API_KEY")
     if not api_key:
         logging.error("FIRECRAWL_API_KEY is not set. Provide it via environment or .env file.")
@@ -297,6 +417,14 @@ def refresh_all(urls: List[str], *, force: bool, timeout: int) -> None:
 
 
 def cmd_add(url: str, *, force: bool, timeout: int) -> None:
+    """
+    Adds a URL to the list if not already present, saves the updated list, and scrapes the URL into a Markdown file.
+    
+    Parameters:
+        url (str): The URL to add and scrape.
+        force (bool): If True, forces re-scraping even if content is unchanged.
+        timeout (int): Timeout in seconds for the scraping operation.
+    """
     urls = load_urls()
     url = normalize_url(url)
     if url not in urls:
@@ -309,6 +437,11 @@ def cmd_add(url: str, *, force: bool, timeout: int) -> None:
 
 
 def cmd_refresh(*, force: bool, timeout: int) -> None:
+    """
+    Refreshes all URLs in the list by scraping their content and updating Markdown files and the catalog.
+    
+    Normalizes and deduplicates URLs from `urls.txt`, saves changes if needed, and invokes the scraping process for each URL with the specified options.
+    """
     urls = load_urls()
     if not urls:
         logging.info("No URLs in urls.txt")
@@ -322,6 +455,16 @@ def cmd_refresh(*, force: bool, timeout: int) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """
+    Builds and returns the command-line argument parser for the scraping tool.
+    
+    The parser supports two subcommands:
+    - `add`: Adds a URL to the list and fetches its content.
+    - `refresh`: Fetches content for all URLs in the list.
+    
+    Returns:
+        argparse.ArgumentParser: The configured argument parser for the CLI.
+    """
     parser = argparse.ArgumentParser(description="Scrape URLs to Markdown using Firecrawl")
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -338,6 +481,15 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Optional[List[str]] = None) -> int:
+    """
+    Entry point for the command-line tool, handling argument parsing and dispatching to the appropriate command.
+    
+    Parameters:
+        argv (Optional[List[str]]): List of command-line arguments to parse. If None, uses sys.argv.
+    
+    Returns:
+        int: Exit code (0 for success).
+    """
     configure_logging()
     read_env()
 
