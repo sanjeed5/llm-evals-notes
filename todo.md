@@ -66,6 +66,10 @@ Goal: Collect LLM evals URLs, scrape to clean Markdown with metadata, and mainta
   - [x] Concurrency to avoid overlapping runs per ref
   - [x] No schedule for now
 
+## Phase 5 — Cost & overwrite behavior
+- [x] Skip re-scraping previously scraped URLs during refresh unless `--force` is provided (saves Firecrawl credits)
+- [x] Overwrite existing `content/{slug}.md` instead of creating hash-suffixed files when content changes
+
 ### Acceptance criteria (CI)
 - [x] A push that changes `urls.txt` triggers the workflow
 - [x] If scraping produces changes, a PR is created with only `content/**` and `data/catalog.json`

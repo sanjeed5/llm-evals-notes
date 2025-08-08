@@ -233,6 +233,12 @@ def refresh_all(urls: List[str], *, force: bool, timeout: int) -> None:
     for raw_url in urls:
         url = normalize_url(raw_url)
         try:
+            # Skip re-scrape by default if URL already exists in catalog (save credits)
+            existing_item = next((it for it in catalog.get("items", []) if it.get("url") == url and it.get("path")), None)
+            if existing_item and not force:
+                logging.info("Skipping previously scraped URL (use --force to refresh): %s", url)
+                continue
+
             logging.info("Fetching %s", url)
             # simple retries with exponential backoff
             last_exc: Optional[Exception] = None
@@ -253,28 +259,15 @@ def refresh_all(urls: List[str], *, force: bool, timeout: int) -> None:
                 continue
 
             # determine slug — preserve existing from catalog if present
-            existing_item = None
-            for it in catalog.get("items", []):
-                if it.get("url") == url and it.get("path"):
-                    existing_item = it
-                    break
-            if existing_item:
+            if existing_item and existing_item.get("path"):
                 existing_path = Path(existing_item["path"]).name
                 slug = existing_path[:-3] if existing_path.endswith(".md") else existing_path
             else:
-                # compute content hash first for potential collision suffix
-                tentative_hash = compute_hash(result.markdown)
-                slug = generate_slug(result.title, url, content_hash=tentative_hash)
+                slug = generate_slug(result.title, url)
 
             # idempotency via hash
             new_hash = compute_hash(result.markdown)
             md_path = CONTENT_DIR / f"{slug}.md"
-            # if path exists but content changed and slug collision risk, append short hash
-            if md_path.exists():
-                existing_text = md_path.read_text(encoding="utf-8")
-                m0 = re.search(r"^---[\s\S]*?\nhash:\s*([0-9a-f]{64})\n[\s\S]*?---\n", existing_text)
-                if not m0 or (m0 and m0.group(1) != new_hash):
-                    md_path = CONTENT_DIR / f"{slug}-{new_hash[:6]}.md"
 
             if md_path.exists() and not force:
                 # parse existing hash from frontmatter
@@ -287,7 +280,8 @@ def refresh_all(urls: List[str], *, force: bool, timeout: int) -> None:
                         upsert_catalog_item(catalog, title=result.title, path=md_path, url=url, content_hash=new_hash)
                         continue
 
-            path = write_markdown_file(slug if md_path.stem == slug else md_path.stem, result, new_hash)
+            # Overwrite the existing file (no hash suffix) or create if new
+            path = write_markdown_file(slug, result, new_hash)
             upsert_catalog_item(catalog, title=result.title, path=path, url=url, content_hash=new_hash)
             logging.info("Wrote %s", path)
         except Exception as exc:  # noqa: BLE001
