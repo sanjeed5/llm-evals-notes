@@ -1,0 +1,8 @@
+https://hamel.dev/blog/posts/evals/index.html
+https://hamel.dev/blog/posts/llm-judge/index.html
+https://hamel.dev/blog/posts/field-guide/index.html
+https://hamel.dev/blog/posts/evals-faq/
+https://jxnl.co/writing/2025/05/19/there-are-only-6-rag-evals/#the-6-core-evaluation-metrics
+https://eugeneyan.com/writing/qa-evals/
+https://eugeneyan.com/writing/eval-process/
+https://eugeneyan.com/writing/aligneval/
