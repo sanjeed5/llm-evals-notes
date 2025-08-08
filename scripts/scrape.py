@@ -15,6 +15,7 @@ from typing import Dict, List, Optional
 from dotenv import load_dotenv
 from firecrawl import FirecrawlApp
 from slugify import slugify
+from urllib.parse import urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT_DIR = ROOT / "content"
@@ -66,12 +67,29 @@ def save_urls(urls: List[str]) -> None:
 
 def normalize_url(url: str) -> str:
     url = url.strip()
-    if not re.match(r"^https?://", url):
+    if not url:
+        return url
+    if not re.match(r"^https?://", url, flags=re.IGNORECASE):
         url = f"https://{url}"
-    # strip anchors and trailing slashes duplication
-    url = re.sub(r"#.*$", "", url)
-    url = re.sub(r"/{2,}$", "/", url)
-    return url
+    parts = urlsplit(url)
+    scheme = parts.scheme.lower() or "https"
+    netloc = parts.netloc.lower()
+    # drop default ports
+    if netloc.endswith(":80") and scheme == "http":
+        netloc = netloc[:-3]
+    if netloc.endswith(":443") and scheme == "https":
+        netloc = netloc[:-4]
+    # remove fragment
+    path = parts.path or "/"
+    # collapse multiple slashes in path
+    path = re.sub(r"/{2,}", "/", path)
+    # remove index.html/htm at end
+    path = re.sub(r"/(index\.html?|index\.htm)$", "/", path, flags=re.IGNORECASE)
+    # remove trailing slash except for root
+    if path != "/":
+        path = path.rstrip("/")
+    query = parts.query
+    return urlunsplit((scheme, netloc, path, query, ""))
 
 
 def compute_hash(markdown: str) -> str:
@@ -102,6 +120,24 @@ def extract_domain(url: str) -> str:
     return re.sub(r"^https?://([^/]+).*$", r"\1", url)
 
 
+def generate_slug(title: str, url: str, content_hash: Optional[str] = None) -> str:
+    domain = extract_domain(url)
+    title_slug = slugify(title) if title else ""
+    # derive from last path segment if title empty
+    path = urlsplit(url).path or "/"
+    last_seg = path.rstrip("/").split("/")[-1] if path != "/" else domain
+    base_slug = title_slug or slugify(last_seg) or slugify(domain)
+    slug = slugify(f"{domain}-{base_slug}")
+    if not slug:
+        slug = hashlib.sha1((domain + base_slug).encode()).hexdigest()[:10]
+    # Optionally append short hash for collision avoidance
+    if content_hash:
+        short = content_hash[:6]
+        slug = f"{slug}"
+        # only add short suffix later if needed upon collision
+    return slug
+
+
 def frontmatter_yaml(meta: Dict[str, str]) -> str:
     import yaml  # local import to keep import list tidy
 
@@ -109,24 +145,42 @@ def frontmatter_yaml(meta: Dict[str, str]) -> str:
 
 
 def scrape_once(app: FirecrawlApp, url: str, timeout: int) -> ScrapeResult:
-    # Firecrawl docs: scrape_url(url, formats=["markdown"]) returns dict with 'content' and 'metadata'
-    resp = app.scrape_url(url, formats=["markdown"])  # type: ignore[arg-type]
-    # Possible shapes have evolved; handle common variants
-    markdown = resp.get("content") or resp.get("markdown") or ""
-    metadata = resp.get("metadata") or {}
-    title = metadata.get("title") or metadata.get("metadata", {}).get("title") or ""
-    status_code = metadata.get("statusCode") or metadata.get("status_code")
-    source_url_meta = metadata.get("sourceURL") or url
+    # Firecrawl SDK (>=2.x) returns a ScrapeResponse pydantic model with attributes
+    timeout_ms = int(timeout * 1000) if timeout else None
+    resp = app.scrape_url(url, formats=["markdown"], timeout=timeout_ms)
+
+    # Primary content
+    markdown = getattr(resp, "markdown", None) or ""
+
+    # Metadata/title/url
+    title_attr = getattr(resp, "title", None) or ""
+    metadata = getattr(resp, "metadata", {}) or {}
+    title = (title_attr or (metadata.get("title") if isinstance(metadata, dict) else "") or "").strip()
+
+    # Prefer response.url, then metadata.sourceURL, else the input url
+    resp_url = getattr(resp, "url", None)
+    source_url_meta = resp_url or (metadata.get("sourceURL") if isinstance(metadata, dict) else None) or url
+
+    # Best-effort status code if present in metadata
+    status_code = None
+    if isinstance(metadata, dict):
+        status_code = metadata.get("statusCode") or metadata.get("status_code")
+        try:
+            status_code = int(status_code) if status_code is not None else None
+        except Exception:
+            status_code = None
+
     if not title:
         # Fallback: derive from domain/path
-        path_part = re.sub(r"^https?://", "", url).rstrip("/")
+        path_part = re.sub(r"^https?://", "", source_url_meta).rstrip("/")
         title = path_part
+
     domain = extract_domain(source_url_meta)
     return ScrapeResult(
-        title=title.strip(),
+        title=title,
         source_url=source_url_meta,
         source_domain=domain,
-        status_code=int(status_code) if status_code is not None else None,
+        status_code=status_code,
         markdown=markdown,
     )
 
@@ -150,9 +204,13 @@ def upsert_catalog_item(catalog: Dict[str, Dict], *, title: str, path: Path, url
     items: List[Dict] = catalog.setdefault("items", [])
     # find by url if present; else by path
     existing = next((it for it in items if it.get("url") == url or it.get("path") == str(path)), None)
+    try:
+        rel_path = path.relative_to(ROOT)
+    except Exception:
+        rel_path = path
     record = {
         "title": title,
-        "path": str(path),
+        "path": str(rel_path),
         "url": url,
         "hash": content_hash,
         "fetched_at": datetime.now(timezone.utc).isoformat(),
@@ -194,13 +252,30 @@ def refresh_all(urls: List[str], *, force: bool, timeout: int) -> None:
                 logging.warning("No markdown returned for %s; skipping", url)
                 continue
 
-            # determine slug
-            fallback = extract_domain(url) + "/" + re.sub(r"[^a-zA-Z0-9]+", "-", url.split("/", 3)[-1]).strip("-")
-            slug = safe_slug(result.title, fallback=fallback)
+            # determine slug — preserve existing from catalog if present
+            existing_item = None
+            for it in catalog.get("items", []):
+                if it.get("url") == url and it.get("path"):
+                    existing_item = it
+                    break
+            if existing_item:
+                existing_path = Path(existing_item["path"]).name
+                slug = existing_path[:-3] if existing_path.endswith(".md") else existing_path
+            else:
+                # compute content hash first for potential collision suffix
+                tentative_hash = compute_hash(result.markdown)
+                slug = generate_slug(result.title, url, content_hash=tentative_hash)
 
             # idempotency via hash
             new_hash = compute_hash(result.markdown)
             md_path = CONTENT_DIR / f"{slug}.md"
+            # if path exists but content changed and slug collision risk, append short hash
+            if md_path.exists():
+                existing_text = md_path.read_text(encoding="utf-8")
+                m0 = re.search(r"^---[\s\S]*?\nhash:\s*([0-9a-f]{64})\n[\s\S]*?---\n", existing_text)
+                if not m0 or (m0 and m0.group(1) != new_hash):
+                    md_path = CONTENT_DIR / f"{slug}-{new_hash[:6]}.md"
+
             if md_path.exists() and not force:
                 # parse existing hash from frontmatter
                 existing_text = md_path.read_text(encoding="utf-8")
@@ -212,7 +287,7 @@ def refresh_all(urls: List[str], *, force: bool, timeout: int) -> None:
                         upsert_catalog_item(catalog, title=result.title, path=md_path, url=url, content_hash=new_hash)
                         continue
 
-            path = write_markdown_file(slug, result, new_hash)
+            path = write_markdown_file(slug if md_path.stem == slug else md_path.stem, result, new_hash)
             upsert_catalog_item(catalog, title=result.title, path=path, url=url, content_hash=new_hash)
             logging.info("Wrote %s", path)
         except Exception as exc:  # noqa: BLE001
@@ -238,7 +313,12 @@ def cmd_refresh(*, force: bool, timeout: int) -> None:
     if not urls:
         logging.info("No URLs in urls.txt")
         return
-    refresh_all(urls, force=force, timeout=timeout)
+    # Normalize and dedupe urls.txt on refresh
+    normalized = sorted({normalize_url(u) for u in urls if u.strip()})
+    if normalized != urls:
+        save_urls(normalized)
+        logging.info("Normalized and deduped urls.txt (%d → %d)", len(urls), len(normalized))
+    refresh_all(normalized, force=force, timeout=timeout)
 
 
 def build_parser() -> argparse.ArgumentParser:
