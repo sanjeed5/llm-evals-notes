@@ -1,9 +1,9 @@
 ---
 title: 'AlignEval: Building an App to Make Evals Easy, Fun, and Automated'
-source_url: https://eugeneyan.com/writing/aligneval/
+source_url: https://eugeneyan.com/writing/aligneval
 source_domain: eugeneyan.com
-date_fetched: '2025-08-08T07:18:38.700466+00:00'
-hash: 93c32d6a5e2e9ce7b6a8a9ccf6a290b126d70fda475697715357336029ecaf98
+date_fetched: '2025-08-08T08:06:37.744112+00:00'
+hash: fe73c54e06f1892ac21d0984cf73b37a9a7cf63fba950c8f6eeea73ec55ecd13
 ---
 
 # AlignEval: Building an App to Make Evals Easy, Fun, and Automated
@@ -158,6 +158,12 @@ If playback doesn't begin shortly, try restarting your device.
 More videos
 
 ## More videos
+
+You're signed out
+
+Videos you watch may be added to the TV's watch history and influence TV recommendations. To avoid this, cancel and sign in to YouTube on your computer.
+
+CancelConfirm
 
 Share
 

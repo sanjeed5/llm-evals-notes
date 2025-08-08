@@ -1,8 +1,8 @@
 ---
 title: "An LLM-as-Judge Won't Save The Product\u2014Fixing Your Process Will"
-source_url: https://eugeneyan.com/writing/eval-process/
+source_url: https://eugeneyan.com/writing/eval-process
 source_domain: eugeneyan.com
-date_fetched: '2025-08-08T06:31:06.636899+00:00'
+date_fetched: '2025-08-08T08:06:40.721161+00:00'
 hash: 20800518f5b4f1ede71855355255b0dbb496e5d39d8a4a8888453d88e770fc46
 ---
 

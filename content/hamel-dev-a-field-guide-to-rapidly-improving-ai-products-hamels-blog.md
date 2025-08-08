@@ -1,9 +1,9 @@
 ---
 title: "A Field Guide to Rapidly Improving AI Products \u2013 Hamel\u2019s Blog"
-source_url: https://hamel.dev/blog/posts/field-guide/index.html
+source_url: https://hamel.dev/blog/posts/field-guide
 source_domain: hamel.dev
-date_fetched: '2025-08-08T06:31:21.706116+00:00'
-hash: bd7dc81aae1f4885bd1f02276779374bf7b63ad0c87363574ed6292307929d91
+date_fetched: '2025-08-08T08:07:05.392842+00:00'
+hash: b15f5443fac9d3493e9708f86dd898d879377bd9d80833a99bb45b75a92106b4
 ---
 
 Most AI teams focus on the wrong things. Here’s a common scene from my consulting work:
@@ -37,7 +37,7 @@ I’ll explain each of these topics with real examples. While every situation is
 
 Let’s start by examining the most common mistake I see teams make – one that derails AI projects before they even begin.
 
-## 1\. The Most Common Mistake: Skipping Error Analysis [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#the-most-common-mistake-skipping-error-analysis)
+## 1\. The Most Common Mistake: Skipping Error Analysis [Anchor](https://hamel.dev/blog/posts/field-guide/\#the-most-common-mistake-skipping-error-analysis)
 
 The “tools first” mindset is the most common mistake in AI development. Teams get caught up in architecture diagrams, frameworks, and dashboards while neglecting the process of actually understanding what’s working and what isn’t.
 
@@ -55,7 +55,7 @@ Second, too many metrics fragment your attention. Instead of focusing on the few
 
 The alternative? Error analysis - the single most valuable activity in AI development and consistently the highest-ROI activity. Let me show you what effective error analysis looks like in practice.
 
-### The Error Analysis Process [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#the-error-analysis-process)
+### The Error Analysis Process [Anchor](https://hamel.dev/blog/posts/field-guide/\#the-error-analysis-process)
 
 When Jacob, the founder of [Nurture Boss](https://nurtureboss.io/), needed to improve their apartment-industry AI assistant, his team built a simple viewer to examine conversations between their AI and users. Next to each conversation was a space for open-ended notes about failure modes.
 
@@ -120,7 +120,7 @@ An error occurred while retrieving sharing information. Please try again later.
 
 •
 
-### Bottom-Up vs. Top-Down Analysis [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#bottom-up-vs.-top-down-analysis)
+### Bottom-Up vs. Top-Down Analysis [Anchor](https://hamel.dev/blog/posts/field-guide/\#bottom-up-vs.-top-down-analysis)
 
 When identifying error types, you can take either a “top-down” or “bottom-up” approach.
 
@@ -144,7 +144,7 @@ If you’d like to see error analysis in action, we recorded a [live walkthrough
 
 This brings us to a crucial question: How do you make it easy for teams to look at their data? The answer leads us to what I consider the most important investment any AI team can make…
 
-## 2\. The Most Important AI Investment: A Simple Data Viewer [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#the-most-important-ai-investment-a-simple-data-viewer)
+## 2\. The Most Important AI Investment: A Simple Data Viewer [Anchor](https://hamel.dev/blog/posts/field-guide/\#the-most-important-ai-investment-a-simple-data-viewer)
 
 The single most impactful investment I’ve seen AI teams make isn’t a fancy evaluation dashboard – it’s building a customized interface that lets anyone examine what their AI is actually doing. I emphasize _customized_ because every domain has unique needs that off-the-shelf tools rarely address. When reviewing apartment leasing conversations, you need to see the full chat history and scheduling context. For real estate queries, you need the property details and source documents right there. Even small UX decisions – like where to place metadata or which filters to expose – can make the difference between a tool people actually use and one they avoid.
 
@@ -181,13 +181,13 @@ The key is starting somewhere, even if it’s simple. I’ve found custom web ap
 
 This brings us to another counter-intuitive lesson: the people best positioned to improve your AI system are often the ones who know the least about AI.
 
-## 3\. Empower Domain Experts To Write Prompts [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#empower-domain-experts-to-write-prompts)
+## 3\. Empower Domain Experts To Write Prompts [Anchor](https://hamel.dev/blog/posts/field-guide/\#empower-domain-experts-to-write-prompts)
 
 I recently worked with an education startup building an interactive learning platform with LLMs. Their product manager, a learning design expert, would create detailed PowerPoint decks explaining pedagogical principles and example dialogues. She’d present these to the engineering team, who would then translate her expertise into prompts.
 
 But here’s the thing: prompts are just English. Having a learning expert communicate teaching principles through PowerPoint, only for engineers to translate that back into English prompts, created unnecessary friction. The most successful teams flip this model by giving domain experts tools to write and iterate on prompts directly.
 
-### Build Bridges, Not Gatekeepers [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#build-bridges-not-gatekeepers)
+### Build Bridges, Not Gatekeepers [Anchor](https://hamel.dev/blog/posts/field-guide/\#build-bridges-not-gatekeepers)
 
 Prompt playgrounds are a great starting point for this. Tools like Arize, Langsmith and Braintrust let teams quickly test different prompts, feed in example datasets, and compare results. Here are some screenshots of these tools:
 
@@ -215,7 +215,7 @@ The UI that users (real estate agents) see.
 
 The same UI, but with an “admin mode”used by the engineering & product team to iterate on the prompt and debug issues.
 
-### Tips For Communicating With Domain Experts [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#tips-for-communicating-with-domain-experts)
+### Tips For Communicating With Domain Experts [Anchor](https://hamel.dev/blog/posts/field-guide/\#tips-for-communicating-with-domain-experts)
 
 There’s another barrier that often prevents domain experts from contributing effectively: unnecessary jargon. I was working with an education startup where engineers, product managers, and learning specialists were talking past each other in meetings. The engineers kept saying, “We’re going to build an agent that does XYZ,” when really the job to be done was writing a prompt. This created an artificial barrier – the learning specialists, who were the actual domain experts, felt like they couldn’t contribute because they didn’t understand “agents.”
 
@@ -233,7 +233,7 @@ There’s nuance here. Technical terminology exists for a reason – it provides
 
 The challenge many teams raise at this point is: “This all sounds great, but what if we don’t have any data yet? How can we look at examples or iterate on prompts when we’re just starting out?” That’s what we’ll talk about next.
 
-## 4\. Bootstrapping Your AI With Synthetic Data Is Effective (Even With Zero Users) [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#bootstrapping-your-ai-with-synthetic-data-is-effective-even-with-zero-users)
+## 4\. Bootstrapping Your AI With Synthetic Data Is Effective (Even With Zero Users) [Anchor](https://hamel.dev/blog/posts/field-guide/\#bootstrapping-your-ai-with-synthetic-data-is-effective-even-with-zero-users)
 
 One of the most common roadblocks I hear from teams is: “We can’t do proper evaluation because we don’t have enough real user data yet.” This creates a chicken-and-egg problem – you need data to improve your AI, but you need a decent AI to get users who generate that data.
 
@@ -243,7 +243,7 @@ As I wrote in my [LLM-as-a-Judge blog post](https://hamel.dev/blog/posts/llm-jud
 
 > “LLMs are surprisingly good at generating excellent - and diverse - examples of user prompts. This can be relevant for powering application features, and sneakily, for building Evals. If this sounds a bit like the Large Language Snake is eating its tail, I was just as surprised as you! All I can say is: it works, ship it.”
 
-### A Framework for Generating Realistic Test Data [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#a-framework-for-generating-realistic-test-data)
+### A Framework for Generating Realistic Test Data [Anchor](https://hamel.dev/blog/posts/field-guide/\#a-framework-for-generating-realistic-test-data)
 
 The key to effective synthetic data is choosing the right dimensions to test. While these dimensions will vary based on your specific needs, I find it helpful to think about three broad categories:
 
@@ -337,7 +337,7 @@ We then feed these test cases through Lucy and log the interactions. This gives 
 
 Sometimes you don’t have access to a production database, especially for new products. In these cases, use LLMs to generate both test queries and the underlying test data. For a real estate AI assistant, this might mean creating synthetic property listings with realistic attributes – prices that match market ranges, valid addresses with real street names, and amenities appropriate for each property type. The key is grounding synthetic data in real-world constraints to make it useful for testing. The specifics of generating robust synthetic databases are beyond the scope of this post.
 
-### Guidelines for Using Synthetic Data [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#guidelines-for-using-synthetic-data)
+### Guidelines for Using Synthetic Data [Anchor](https://hamel.dev/blog/posts/field-guide/\#guidelines-for-using-synthetic-data)
 
 When generating synthetic data, follow these key principles to ensure it’s effective:
 
@@ -356,13 +356,13 @@ This approach isn’t just theoretical – it’s been proven in production acro
 
 Let’s look at how to maintain trust in your evaluation system as you scale…
 
-## 5\. Maintaining Trust In Evals Is Critical [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#maintaining-trust-in-evals-is-critical)
+## 5\. Maintaining Trust In Evals Is Critical [Anchor](https://hamel.dev/blog/posts/field-guide/\#maintaining-trust-in-evals-is-critical)
 
 This is a pattern I’ve seen repeatedly: teams build evaluation systems, then gradually lose faith in them. Sometimes it’s because the metrics don’t align with what they observe in production. Other times, it’s because the evaluations become too complex to interpret. Either way, the result is the same – the team reverts to making decisions based on gut feeling and anecdotal feedback, undermining the entire purpose of having evaluations.
 
 Maintaining trust in your evaluation system is just as important as building it in the first place. Here’s how the most successful teams approach this challenge:
 
-### Understanding Criteria Drift [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#understanding-criteria-drift)
+### Understanding Criteria Drift [Anchor](https://hamel.dev/blog/posts/field-guide/\#understanding-criteria-drift)
 
 One of the most insidious problems in AI evaluation is “criteria drift” – a phenomenon where evaluation criteria evolve as you observe more model outputs. In their paper [“Who Validates the Validators?”](https://arxiv.org/abs/2404.12272), Shankar et al. describe this phenomenon:
 
@@ -378,11 +378,11 @@ The process of reviewing AI outputs helped him articulate his own evaluation sta
 
 The teams that maintain trust in their evaluation systems embrace this reality rather than fighting it. They treat evaluation criteria as living documents that evolve alongside their understanding of the problem space. They also recognize that different stakeholders might have different (sometimes contradictory) criteria, and they work to reconcile these perspectives rather than imposing a single standard.
 
-### Creating Trustworthy Evaluation Systems [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#creating-trustworthy-evaluation-systems)
+### Creating Trustworthy Evaluation Systems [Anchor](https://hamel.dev/blog/posts/field-guide/\#creating-trustworthy-evaluation-systems)
 
 So how do you build evaluation systems that remain trustworthy despite criteria drift? Here are the approaches I’ve found most effective:
 
-#### 1\. Favor Binary Decisions Over Arbitrary Scales [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#favor-binary-decisions-over-arbitrary-scales)
+#### 1\. Favor Binary Decisions Over Arbitrary Scales [Anchor](https://hamel.dev/blog/posts/field-guide/\#favor-binary-decisions-over-arbitrary-scales)
 
 As I wrote in my [LLM-as-a-Judge post](https://hamel.dev/blog/posts/llm-judge/#why-are-simple-passfail-metrics-important), binary decisions provide clarity that more complex scales often obscure. When faced with a 1-5 scale, evaluators frequently struggle with the difference between a 3 and a 4, introducing inconsistency and subjectivity. What exactly distinguishes “somewhat helpful” from “helpful”? These boundary cases consume disproportionate mental energy and create noise in your evaluation data. And even when businesses use a 1-5 scale, they inevitably ask where to draw the line for “good enough” or to trigger intervention, forcing a binary decision anyway.
 
@@ -390,7 +390,7 @@ In contrast, a binary pass/fail forces evaluators to make a clear judgment: did 
 
 I’ve found that teams who resist binary evaluation often do so because they want to capture nuance. But nuance isn’t lost – it’s just moved to the qualitative critique that accompanies the judgment. The critique provides rich context about why something passed or failed, and what specific aspects could be improved, while the binary decision creates actionable clarity about whether improvement is needed at all.
 
-#### 2\. Enhance Binary Judgments With Detailed Critiques [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#enhance-binary-judgments-with-detailed-critiques)
+#### 2\. Enhance Binary Judgments With Detailed Critiques [Anchor](https://hamel.dev/blog/posts/field-guide/\#enhance-binary-judgments-with-detailed-critiques)
 
 While binary decisions provide clarity, they work best when paired with detailed critiques that capture the nuance of why something passed or failed. This combination gives you the best of both worlds: clear, actionable metrics and rich contextual understanding.
 
@@ -402,7 +402,7 @@ These critiques serve multiple functions beyond just explanation. They force dom
 
 When included as few-shot examples in judge prompts, these critiques improve the LLM’s ability to reason about complex edge cases. I’ve found this approach often yields 15-20% higher agreement rates between human and LLM evaluations compared to prompts without example critiques. The critiques also provide excellent raw material for generating high-quality synthetic data, creating a flywheel for improvement.
 
-#### 3\. Measure Alignment Between Automated Evals and Human Judgment [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#measure-alignment-between-automated-evals-and-human-judgment)
+#### 3\. Measure Alignment Between Automated Evals and Human Judgment [Anchor](https://hamel.dev/blog/posts/field-guide/\#measure-alignment-between-automated-evals-and-human-judgment)
 
 If you’re using LLMs to evaluate outputs (which is often necessary at scale), it’s crucial to regularly check how well these automated evaluations align with human judgment.
 
@@ -422,7 +422,7 @@ It took three iterations to achieve >90% agreement, but this investment paid off
 
 Tools like [Eugene Yan’s AlignEval](https://eugeneyan.com/writing/aligneval/) demonstrate this alignment process beautifully. It provides a simple interface where you upload data, label examples with a binary “good” or “bad,” and then evaluate LLM-based judges against those human judgments. What makes it effective is how it streamlines the workflow – you can quickly see where automated evaluations diverge from your preferences, refine your criteria based on these insights, and measure improvement over time. This approach reinforces that alignment isn’t a one-time setup but an ongoing conversation between human judgment and automated evaluation.
 
-### Scaling Without Losing Trust [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#scaling-without-losing-trust)
+### Scaling Without Losing Trust [Anchor](https://hamel.dev/blog/posts/field-guide/\#scaling-without-losing-trust)
 
 As your AI system grows, you’ll inevitably face pressure to reduce the human effort involved in evaluation. This is where many teams go wrong – they automate too much, too quickly, and lose the human connection that keeps their evaluations grounded.
 
@@ -441,7 +441,7 @@ Scaling evaluation isn’t just about reducing human effort – it’s about dir
 
 Now that we’ve covered how to maintain trust in your evaluations, let’s talk about a fundamental shift in how you should approach AI development roadmaps…
 
-## 6\. Your AI Roadmap Should Count Experiments, Not Features [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#your-ai-roadmap-should-count-experiments-not-features)
+## 6\. Your AI Roadmap Should Count Experiments, Not Features [Anchor](https://hamel.dev/blog/posts/field-guide/\#your-ai-roadmap-should-count-experiments-not-features)
 
 If you’ve worked in software development, you’re familiar with traditional roadmaps: a list of features with target delivery dates. Teams commit to shipping specific functionality by specific deadlines, and success is measured by how closely they hit those targets.
 
@@ -451,7 +451,7 @@ I’ve watched teams commit to roadmaps like “Launch sentiment analysis by Q2�
 
 The fundamental problem is that traditional roadmaps assume we know what’s possible. With conventional software, that’s often true – given enough time and resources, you can build most features reliably. With AI, especially at the cutting edge, you’re constantly testing the boundaries of what’s feasible.
 
-### Experiments vs. Features [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#experiments-vs.-features)
+### Experiments vs. Features [Anchor](https://hamel.dev/blog/posts/field-guide/\#experiments-vs.-features)
 
 [Bryan Bischof](https://www.linkedin.com/in/bryan-bischof/), Former Head of AI at Hex, introduced me to what he calls a “capability funnel” approach to AI roadmaps. This strategy reframes how we think about AI development progress.
 
@@ -469,7 +469,7 @@ The most successful teams I’ve worked with structure their roadmaps around exp
 
 While LLMs might not require the same kind of feature engineering or model training as traditional ML, the underlying principle remains the same: time-box your exploration, establish clear decision points, and focus on proving feasibility before committing to full implementation. This approach gives leadership confidence that resources won’t be wasted on open-ended exploration, while giving the team the freedom to learn and adapt as they go.
 
-### The Foundation: Evaluation Infrastructure [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#the-foundation-evaluation-infrastructure)
+### The Foundation: Evaluation Infrastructure [Anchor](https://hamel.dev/blog/posts/field-guide/\#the-foundation-evaluation-infrastructure)
 
 The key to making an experiment-based roadmap work is having robust evaluation infrastructure. Without it, you’re just guessing whether your experiments are working. With it, you can rapidly iterate, test hypotheses, and build on successes.
 
@@ -477,7 +477,7 @@ I saw this firsthand during the early development of GitHub Copilot. What most p
 
 This wasn’t wasted time—it was the foundation that accelerated everything. With solid evaluation in place, the team ran thousands of experiments, quickly identified what worked, and could say with confidence “this change improved quality by X%” instead of relying on gut feelings. While the upfront investment in evaluation feels slow, it prevents endless debates about whether changes help or hurt, and dramatically speeds up innovation later.
 
-### Communicating This to Stakeholders [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#communicating-this-to-stakeholders)
+### Communicating This to Stakeholders [Anchor](https://hamel.dev/blog/posts/field-guide/\#communicating-this-to-stakeholders)
 
 The challenge, of course, is that executives often want certainty. They want to know when features will ship and what they’ll do. How do you bridge this gap?
 
@@ -491,7 +491,7 @@ This approach gives stakeholders clear decision points while acknowledging the i
 
 Bryan’s capability funnel approach provides another powerful communication tool. It allows teams to show concrete progress through the funnel stages, even when the final solution isn’t ready. It also helps executives understand where problems are occurring and make informed decisions about where to invest resources.
 
-### Build a Culture of Experimentation Through Failure Sharing [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#build-a-culture-of-experimentation-through-failure-sharing)
+### Build a Culture of Experimentation Through Failure Sharing [Anchor](https://hamel.dev/blog/posts/field-guide/\#build-a-culture-of-experimentation-through-failure-sharing)
 
 Perhaps the most counterintuitive aspect of this approach is the emphasis on learning from failures. In traditional software development, failures are often hidden or downplayed. In AI development, they’re the primary source of learning.
 
@@ -501,7 +501,7 @@ Eugene operationalizes this at his organization through what he calls a “fifte
 
 This practice normalizes failure as part of the learning process. It shows that even experienced practitioners encounter dead ends, and it accelerates team learning by sharing those experiences openly. And by celebrating the process of experimentation rather than just the outcomes, teams create an environment where people feel safe taking risks and learning from failures.
 
-### A Better Way Forward [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#a-better-way-forward)
+### A Better Way Forward [Anchor](https://hamel.dev/blog/posts/field-guide/\#a-better-way-forward)
 
 So what does an experiment-based roadmap look like in practice? Here’s a simplified example from a content moderation project Eugene worked on:
 
@@ -523,7 +523,7 @@ The key metric for AI roadmaps isn’t features shipped – it’s experiments r
 
 By reframing your roadmap around experiments rather than features, you create the conditions for similar breakthroughs in your own organization.
 
-## Conclusion [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#conclusion)
+## Conclusion [Anchor](https://hamel.dev/blog/posts/field-guide/\#conclusion)
 
 Throughout this post, I’ve shared patterns I’ve observed across dozens of AI implementations. The most successful teams aren’t the ones with the most sophisticated tools or the most advanced models – they’re the ones that master the fundamentals of measurement, iteration, and learning.
 
@@ -544,7 +544,7 @@ The core principles are surprisingly simple:
 
 These principles apply regardless of your domain, team size, or technical stack. They’ve worked for companies ranging from early-stage startups to tech giants, across use cases from customer support to code generation.
 
-### Resources for Going Deeper [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#resources-for-going-deeper)
+### Resources for Going Deeper [Anchor](https://hamel.dev/blog/posts/field-guide/\#resources-for-going-deeper)
 
 If you’d like to explore these topics further, here are some resources that might help:
 
@@ -555,6 +555,6 @@ If you’d like to explore these topics further, here are some resources that mi
 - If you’re looking for hands-on guidance specific to your organization’s needs, you can learn more about working with me at [Parlance Labs](https://parlance-labs.com/).
 
 
-## Footnotes [Anchor](https://hamel.dev/blog/posts/field-guide/index.html\#footnotes-1)
+## Footnotes [Anchor](https://hamel.dev/blog/posts/field-guide/\#footnotes-1)
 
 1. I write more broadly about machine learning, AI, and software development. Some posts that expand on these topics include [Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/), [Creating a LLM-as-a-Judge That Drives Business Results](https://hamel.dev/blog/posts/llm-judge/), and [What We’ve Learned From A Year of Building with LLMs](https://applied-llms.org/). You can see all my posts at [hamel.dev](https://hamel.dev/). [↩︎](https://hamel.dev/blog/posts/field-guide/#fnref1)

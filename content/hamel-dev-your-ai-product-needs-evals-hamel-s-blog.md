@@ -1,12 +1,12 @@
 ---
 title: "Your AI Product Needs Evals \u2013 Hamel's Blog"
-source_url: https://hamel.dev/blog/posts/evals/index.html
+source_url: https://hamel.dev/blog/posts/evals
 source_domain: hamel.dev
-date_fetched: '2025-08-08T06:29:43.206538+00:00'
-hash: aca6e857d2175cd50a5ad6d775b5e23229802cd7de501d53b6ad404b8a9be780
+date_fetched: '2025-08-08T08:06:45.169649+00:00'
+hash: 1a40eea4ccddaad533f8238807a7852d8f9fd129d057487752661d989801ef78
 ---
 
-## Motivation [Anchor](https://hamel.dev/blog/posts/evals/index.html\#motivation)
+## Motivation [Anchor](https://hamel.dev/blog/posts/evals/\#motivation)
 
 I started working with language models five years ago when I led the team that created [CodeSearchNet](https://github.com/github/CodeSearchNet), a precursor to GitHub CoPilot. Since then, I’ve seen many successful and unsuccessful approaches to building LLM products. I’ve found that unsuccessful products almost always share a common root cause: **a failure to create robust evaluation systems.**
 
@@ -38,7 +38,7 @@ To ground this post in a real-world situation, I’ll walk through a case study 
 2. There was limited visibility into the AI system’s effectiveness across tasks beyond vibe checks.
 3. Prompts expanded into long and unwieldy forms, attempting to cover numerous edge cases and examples.
 
-## Problem: How To Systematically Improve The AI? [Anchor](https://hamel.dev/blog/posts/evals/index.html\#problem-how-to-systematically-improve-the-ai)
+## Problem: How To Systematically Improve The AI? [Anchor](https://hamel.dev/blog/posts/evals/\#problem-how-to-systematically-improve-the-ai)
 
 To break through this plateau, we created a systematic approach to improving Lucy **centered on evaluation.** Our approach is illustrated by the diagram below.
 
@@ -62,11 +62,11 @@ The cost of Level 3 > Level 2 > Level 1. This dictates the cadence and manner yo
 
 There isn’t a strict formula as to when to introduce each level of testing. You want to balance getting user feedback quickly, managing user perception, and the goals of your AI product. This isn’t too dissimilar from the balancing act you must do for products more generally.
 
-## Level 1: Unit Tests [Anchor](https://hamel.dev/blog/posts/evals/index.html\#level-1-unit-tests)
+## Level 1: Unit Tests [Anchor](https://hamel.dev/blog/posts/evals/\#level-1-unit-tests)
 
 Unit tests for LLMs are assertions (like you would write in [pytest](https://docs.pytest.org/en/8.0.x/)). Unlike typical unit tests, you want to organize these assertions for use in places beyond unit tests, such as data cleaning and automatic retries (using the assertion error to course-correct) during model inference. The important part is that these assertions should run fast and cheaply as you develop your application so that you can run them every time your code changes. If you have trouble thinking of assertions, you should critically examine your traces and failure modes. Also, do not shy away from using an LLM to help you brainstorm assertions!
 
-### Step 1: Write Scoped Tests [Anchor](https://hamel.dev/blog/posts/evals/index.html\#step-1-write-scoped-tests)
+### Step 1: Write Scoped Tests [Anchor](https://hamel.dev/blog/posts/evals/\#step-1-write-scoped-tests)
 
 The most effective way to think about unit tests is to break down the scope of your LLM into features and scenarios. For example, one feature of Lucy is the ability to find real estate listings, which we can break down into scenarios like so:
 
@@ -98,7 +98,7 @@ CRM results returned to the LLM contain fields that shouldn’t be surfaced to t
 
 **Rechat has hundreds of these unit tests. We continuously update them based on new failures we observe in the data as users challenge the AI or the product evolves.** These unit tests are crucial to getting feedback quickly when iterating on your AI system (prompt engineering, improving RAG, etc.). Many people eventually outgrow their unit tests and move on to other levels of evaluation as their product matures, but it is essential not to skip this step!
 
-### Step 2: Create Test Cases [Anchor](https://hamel.dev/blog/posts/evals/index.html\#step-2-create-test-cases)
+### Step 2: Create Test Cases [Anchor](https://hamel.dev/blog/posts/evals/\#step-2-create-test-cases)
 
 To test these assertions, you must generate test cases or inputs that will trigger all scenarios you wish to test. I often utilize an LLM to generate these inputs synthetically; for example, here is one such prompt Rechat uses to generate synthetic inputs for a feature that creates and retrieves contacts:
 
@@ -145,7 +145,7 @@ You don’t need to wait for production data to test your system. You can make e
 
 On a related note, unlike traditional unit tests, you don’t necessarily need a 100% pass rate. Your pass rate is a product decision, depending on the failures you are willing to tolerate.
 
-### Step 3: Run & Track Your Tests Regularly [Anchor](https://hamel.dev/blog/posts/evals/index.html\#step-3-run-track-your-tests-regularly)
+### Step 3: Run & Track Your Tests Regularly [Anchor](https://hamel.dev/blog/posts/evals/\#step-3-run-track-your-tests-regularly)
 
 There are many ways to orchestrate Level 1 tests. Rechat has been leveraging CI infrastructure (e.g., GitHub Actions, GitLab Pipelines, etc.) to execute these tests. However, the tooling for this part of the workflow is nascent and evolving rapidly.
 
@@ -157,11 +157,11 @@ I recommend starting simple and leveraging your existing analytics system to vis
 
 This screenshot shows the prevalence of a particular error (shown in yellow) in Lucy before (left) vs after (right) we addressed it.
 
-## Level 2: Human & Model Eval [Anchor](https://hamel.dev/blog/posts/evals/index.html\#level-2-human-model-eval)
+## Level 2: Human & Model Eval [Anchor](https://hamel.dev/blog/posts/evals/\#level-2-human-model-eval)
 
 After you have built a solid foundation of Level 1 tests, you can move on to other forms of validation that cannot be tested by assertions alone. A prerequisite to performing human and model-based eval is to log your traces.
 
-### Logging Traces [Anchor](https://hamel.dev/blog/posts/evals/index.html\#logging-traces)
+### Logging Traces [Anchor](https://hamel.dev/blog/posts/evals/\#logging-traces)
 
 A trace is a concept that has been around for a while in software engineering and is a log of a sequence of events such as user sessions or a request flow through a distributed system. In other words, tracing is a logical grouping of logs. In the context of LLMs, traces often refer to conversations you have with a LLM. For example, a user message, followed by an AI response, followed by another user message, would be an example of a trace.
 
@@ -171,7 +171,7 @@ There are a growing number of solutions for logging LLM traces. [2](https://hame
 
 I like LangSmith - it doesn’t require that you use LangChain and is intuitive and easy to use. Searching, filtering, and reading traces are essential features for whatever solution you pick. I’ve found that some tools do not implement these basic functions correctly!
 
-### Looking At Your Traces [Anchor](https://hamel.dev/blog/posts/evals/index.html\#looking-at-your-traces)
+### Looking At Your Traces [Anchor](https://hamel.dev/blog/posts/evals/\#looking-at-your-traces)
 
 **You must remove all friction from the process of looking at data.** This means rendering your traces in domain-specific ways. I’ve often found that it’s [better to build my own data viewing & labeling tool](https://hamel.dev/notes/llm/finetuning/04_data_cleaning.html) so I can gather all the information I need onto one screen. In Lucy’s case, we needed to look at many sources of information (trace log, the CRM, etc) to understand what the AI did. This is precisely the type of friction that needs to be eliminated. In Rechat’s case, this meant adding information like:
 
@@ -192,11 +192,11 @@ I often start by labeling examples as good or bad. I’ve found that assigning s
 
 As discussed later, these labeled examples measure the quality of your system, validate automated evaluation, and curate high-quality synthetic data for fine-tuning.
 
-#### How much data should you look at? [Anchor](https://hamel.dev/blog/posts/evals/index.html\#how-much-data-should-you-look-at)
+#### How much data should you look at? [Anchor](https://hamel.dev/blog/posts/evals/\#how-much-data-should-you-look-at)
 
 I often get asked how much data to examine. When starting, you should examine as much data as possible. I usually read traces generated from ALL test cases and user-generated traces at a minimum. **You can never stop looking at data—no free lunch exists.** However, you can sample your data more over time, lessening the burden. [3](https://hamel.dev/blog/posts/evals/#fn3)
 
-### Automated Evaluation w/ LLMs [Anchor](https://hamel.dev/blog/posts/evals/index.html\#automated-evaluation-w-llms)
+### Automated Evaluation w/ LLMs [Anchor](https://hamel.dev/blog/posts/evals/\#automated-evaluation-w-llms)
 
 Many vendors want to sell you tools that claim to eliminate the need for a human to look at the data. Having humans periodically evaluate at least a sample of traces is a good idea. I often find that “correctness” is somewhat subjective, and you must align the model with a human.
 
@@ -226,13 +226,13 @@ General tips on model-based eval:
 
 My favorite aspect about creating a good evaluator model is that its critiques can be used to curate high-quality synthetic data, which I will touch upon later.
 
-## Level 3: A/B Testing [Anchor](https://hamel.dev/blog/posts/evals/index.html\#level-3-ab-testing)
+## Level 3: A/B Testing [Anchor](https://hamel.dev/blog/posts/evals/\#level-3-ab-testing)
 
 Finally, it is always good to perform A/B tests to ensure your AI product is driving user behaviors or outcomes you desire. A/B testing for LLMs compared to other types of products isn’t too different. If you want to learn more about A/B testing, I recommend reading the [Eppo blog](https://www.geteppo.com/blog) (which was created by colleagues I used to work with who are rock stars in A/B testing).
 
 It’s okay to put this stage off until you are sufficiently ready and convinced that your AI product is suitable for showing to real users. This level of evaluation is usually only appropriate for more mature products.
 
-## Evaluating RAG [Anchor](https://hamel.dev/blog/posts/evals/index.html\#evaluating-rag)
+## Evaluating RAG [Anchor](https://hamel.dev/blog/posts/evals/\#evaluating-rag)
 
 Aside from evaluating your system as a whole, you can evaluate sub-components of your AI, like RAG. Evaluating RAG is beyond the scope of this post, but you can learn more about this subject [in a post by Jason Liu](https://jxnl.github.io/blog/writing/2024/02/28/levels-of-complexity-rag-applications/).
 
@@ -240,13 +240,13 @@ Aside from evaluating your system as a whole, you can evaluate sub-components of
 
 In addition to iterating fast, eval systems unlock the ability to fine-tune and debug, which can take your AI product to the next level.
 
-## Fine-Tuning [Anchor](https://hamel.dev/blog/posts/evals/index.html\#fine-tuning)
+## Fine-Tuning [Anchor](https://hamel.dev/blog/posts/evals/\#fine-tuning)
 
 Rechat resolved many failure modes through fine-tuning that were not possible with prompt engineering alone. **Fine-tuning is best for learning syntax, style, and rules, whereas techniques like RAG supply the model with context or up-to-date facts.**
 
 99% of the labor involved with fine-tuning is assembling high-quality data that covers your AI product’s surface area. However, if you have a solid evaluation system like Rechat’s, you already have a robust data generation and curation engine! I will expand more on the process of fine-tuning in a future post. [4](https://hamel.dev/blog/posts/evals/#fn4)
 
-### Data Synthesis & Curation [Anchor](https://hamel.dev/blog/posts/evals/index.html\#data-synthesis-curation)
+### Data Synthesis & Curation [Anchor](https://hamel.dev/blog/posts/evals/\#data-synthesis-curation)
 
 To illustrate why data curation and synthesis come nearly for free once you have an evaluation system, consider the case where you want to create additional fine-tuning data for the listing finder mentioned earlier. First, you can use LLMs to generate synthetic data with a prompt like this:
 
@@ -266,7 +266,7 @@ Output should be a JSON code block array. Example:
 
 This is almost identical to the exercise for producing test cases! You can then use your Level 1 & Level 2 tests to filter out undesirable data that fails assertions or that the critique model thinks are wrong. You can also use your existing human evaluation tools to look at traces to curate traces for a fine-tuning dataset.
 
-## Debugging [Anchor](https://hamel.dev/blog/posts/evals/index.html\#debugging)
+## Debugging [Anchor](https://hamel.dev/blog/posts/evals/\#debugging)
 
 When you get a complaint or see an error related to your AI product, you should be able to debug this quickly. If you have a robust evaluation system, you already have:
 
@@ -296,7 +296,7 @@ I’d love to hear from you if you found this post helpful or have any questions
 
 _This article is an adaptation of [this conversation](https://www.youtube.com/watch?v=B_DMMlDuJB0) I had with Emil Sedgh and Hugo Browne-Anderson on the [Vanishing Gradients podcast](https://vanishinggradients.fireside.fm/). Thanks to Jeremy Howard, Eugene Yan, Shreya Shankar, Jeremy Lewi, and Joseph Gleasure for reviewing this article._
 
-## Footnotes [Anchor](https://hamel.dev/blog/posts/evals/index.html\#footnotes-1)
+## Footnotes [Anchor](https://hamel.dev/blog/posts/evals/\#footnotes-1)
 
 1. This is not to suggest that people are lazy. Many don’t know how to set up eval systems and skip these steps. [↩︎](https://hamel.dev/blog/posts/evals/#fnref1)
 

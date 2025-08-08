@@ -1,14 +1,14 @@
 ---
 title: "Creating a LLM-as-a-Judge That Drives Business Results \u2013 Hamel's Blog"
-source_url: https://hamel.dev/blog/posts/llm-judge/index.html
+source_url: https://hamel.dev/blog/posts/llm-judge
 source_domain: hamel.dev
-date_fetched: '2025-08-08T06:31:25.540150+00:00'
-hash: da1ccbd68d8f47a842f949d1c1e8fe29c06f92873953b35aeb82aa253a56756a
+date_fetched: '2025-08-08T08:07:08.407508+00:00'
+hash: 42199732e9a96e07091e38d7af1816441bb99ecd27543aced2e4765d1dab48ef
 ---
 
 Earlier this year, I wrote [Your AI product needs evals](https://hamel.dev/blog/posts/evals/). Many of you asked, “How do I get started with LLM-as-a-judge?” This guide shares what I’ve learned after helping over [30 companies](https://parlance-labs.com/) set up their evaluation systems.
 
-## The Problem: AI Teams Are Drowning in Data [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#the-problem-ai-teams-are-drowning-in-data)
+## The Problem: AI Teams Are Drowning in Data [Anchor](https://hamel.dev/blog/posts/llm-judge/\#the-problem-ai-teams-are-drowning-in-data)
 
 Ever spend weeks building an AI system, only to realize you have no idea if it’s actually working? You’re not alone. I’ve noticed teams repeat the same mistakes when using LLMs to evaluate AI outputs:
 
@@ -27,7 +27,7 @@ An illustrative example of a bad eval dashboard
 
 Tracking a bunch of scores on a 1-5 scale is often a sign of a bad eval process (I’ll discuss why later). In this post, I’ll show you how to avoid these pitfalls. The solution is to use a technique that I call **“Critique Shadowing”**. Here’s how to do it, step by step.
 
-## Step 1: Find _The_ Principal Domain Expert [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#step-1-find-the-principal-domain-expert)
+## Step 1: Find _The_ Principal Domain Expert [Anchor](https://hamel.dev/blog/posts/llm-judge/\#step-1-find-the-principal-domain-expert)
 
 In most organizations there is usually one (maybe two) key individuals whose judgment is crucial for the success of your AI product. These are the people with deep domain expertise or represent your target users. Identifying and involving this **Principal Domain Expert** early in the process is critical.
 
@@ -59,21 +59,21 @@ Many developers attempt to act as the domain expert themselves, or find a conven
 
 **Remember:** This doesn’t have to take a lot of the domain expert’s time. Later in this post, I’ll discuss how you can make the process efficient. Their involvement is absolutely critical to the AI’s success.
 
-### Next Steps [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#next-steps)
+### Next Steps [Anchor](https://hamel.dev/blog/posts/llm-judge/\#next-steps)
 
 Once you’ve found your expert, we need to give them the right data to review. Let’s talk about how to do that next.
 
-## Step 2: Create a Dataset [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#step-2-create-a-dataset)
+## Step 2: Create a Dataset [Anchor](https://hamel.dev/blog/posts/llm-judge/\#step-2-create-a-dataset)
 
 With your principal domain expert on board, the next step is to build a dataset that captures problems that your AI will encounter. It’s important that the dataset is diverse and represents the types of interactions that your AI will have in production.
 
-### Why a Diverse Dataset Matters [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#why-a-diverse-dataset-matters)
+### Why a Diverse Dataset Matters [Anchor](https://hamel.dev/blog/posts/llm-judge/\#why-a-diverse-dataset-matters)
 
 - **Comprehensive Testing**: Ensures your AI is evaluated across a wide range of situations.
 - **Realistic Interactions**: Reflects actual user behavior for more relevant evaluations.
 - **Identifies Weaknesses**: Helps uncover areas where the AI may struggle or produce errors.
 
-### Dimensions for Structuring Your Dataset [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#dimensions-for-structuring-your-dataset)
+### Dimensions for Structuring Your Dataset [Anchor](https://hamel.dev/blog/posts/llm-judge/\#dimensions-for-structuring-your-dataset)
 
 You want to define dimensions that make sense for your use case. For example, here are ones that I often use for B2C applications:
 
@@ -81,9 +81,9 @@ You want to define dimensions that make sense for your use case. For example, he
 2. **Scenarios**: Situations or problems the AI may encounter and needs to handle.
 3. **Personas**: Representative user profiles with distinct characteristics and needs.
 
-### Examples of Features, Scenarios, and Personas [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#examples-of-features-scenarios-and-personas)
+### Examples of Features, Scenarios, and Personas [Anchor](https://hamel.dev/blog/posts/llm-judge/\#examples-of-features-scenarios-and-personas)
 
-#### Features [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#features)
+#### Features [Anchor](https://hamel.dev/blog/posts/llm-judge/\#features)
 
 | **Email Summarization** | Condensing lengthy emails into key points. |
 | **Meeting Scheduler** | Automating the scheduling of meetings across time zones. |
@@ -92,7 +92,7 @@ You want to define dimensions that make sense for your use case. For example, he
 | **Language Translation** | Translating text between languages. |
 | **Content Recommendation** | Suggesting articles or products based on user interests. |
 
-#### Scenarios [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#scenarios)
+#### Scenarios [Anchor](https://hamel.dev/blog/posts/llm-judge/\#scenarios)
 
 Scenarios are situations the AI needs to handle, (not based on the outcome of the AI’s response).
 
@@ -104,7 +104,7 @@ Scenarios are situations the AI needs to handle, (not based on the outcome of th
 | **Incomplete Information** | User omits required details. For example: User wants to initiate a return but hasn’t provided the order number or reason. AI needs to collect this information step by step. |
 | **Unsupported Feature** | User requests functionality that doesn’t exist. For example: User asks to change payment method after order has shipped. AI must explain why this isn’t possible and suggest alternatives. |
 
-#### Personas [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#personas)
+#### Personas [Anchor](https://hamel.dev/blog/posts/llm-judge/\#personas)
 
 | **New User** | Unfamiliar with the system; requires guidance. |
 | **Expert User** | Experienced; expects efficiency and advanced features. |
@@ -113,11 +113,11 @@ Scenarios are situations the AI needs to handle, (not based on the outcome of th
 | **Technophobe** | Uncomfortable with technology; needs simple instructions. |
 | **Elderly User** | May not be tech-savvy; requires patience and clear guidance. |
 
-### This taxonomy is not universal [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#this-taxonomy-is-not-universal)
+### This taxonomy is not universal [Anchor](https://hamel.dev/blog/posts/llm-judge/\#this-taxonomy-is-not-universal)
 
 This taxonomy (features, scenarios, personas) is not universal. For example, it may not make sense to even have personas if users aren’t directly engaging with your AI. The idea is you should outline dimensions that make sense for your use case and generate data that covers them. You’ll likely refine these after the first round of evaluations.
 
-### Generating Data [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#generating-data)
+### Generating Data [Anchor](https://hamel.dev/blog/posts/llm-judge/\#generating-data)
 
 To build your dataset, you can:
 
@@ -132,7 +132,7 @@ Regardless of whether you use existing data or synthetic data, you want good cov
 
 When making test data, use your APIs and databases where appropriate. This will create realistic data and trigger the right scenarios. Sometimes you’ll need to write simple programs to get this information. That’s what the “Assumptions” column is referring to in the examples below.
 
-### Example LLM Prompts for Generating User Inputs [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#example-llm-prompts-for-generating-user-inputs)
+### Example LLM Prompts for Generating User Inputs [Anchor](https://hamel.dev/blog/posts/llm-judge/\#example-llm-prompts-for-generating-user-inputs)
 
 Here are some example prompts that illustrate how to use an LLM to generate synthetic **user inputs** for different combinations of features, scenarios, and personas:
 
@@ -141,7 +141,7 @@ Here are some example prompts that illustrate how to use an LLM to generate synt
 | 3 | **Meeting Scheduler** | Ambiguous Request | Busy Professional | “Simulate a user input from someone who is clearly in a hurry, using abbreviated language and minimal details to request scheduling a meeting. The message should feel rushed and lack specific information.” | N/A |
 | 4 | **Content Recommendation** | No Matches Found | Expert User | “Produce a user input from someone who demonstrates in-depth knowledge of their industry, using specific terminology to request articles on sustainable supply chain management. Use the information in this article involving sustainable supply chain management to formulate a plausible query: {{article}}” | No articles on ‘Emerging trends in sustainable supply chain management’ exist in the system. |
 
-### Generating Synthetic Data [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#generating-synthetic-data)
+### Generating Synthetic Data [Anchor](https://hamel.dev/blog/posts/llm-judge/\#generating-synthetic-data)
 
 When generating synthetic data, you only need to create the user inputs. You then feed these inputs into your AI system to generate the AI’s responses. It’s important that you log everything so you can evaluate your AI. To recap, here’s the process:
 
@@ -150,25 +150,25 @@ When generating synthetic data, you only need to create the user inputs. You the
 3. **Capture AI Responses**: Record the AI’s responses to form complete interactions.
 4. **Organize the Interactions**: Create a table to store the user inputs, AI responses, and relevant metadata.
 
-#### How much data should you generate? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#how-much-data-should-you-generate)
+#### How much data should you generate? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#how-much-data-should-you-generate)
 
 There is no right answer here. At a minimum, you want to generate enough data so that you have examples for each combination of dimensions (in this toy example: features, scenarios, and personas). However, you also want to keep generating more data until you feel like you have stopped seeing new failure modes. The amount of data I generate varies significantly depending on the use case.
 
-#### Does synthetic data actually work? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#does-synthetic-data-actually-work)
+#### Does synthetic data actually work? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#does-synthetic-data-actually-work)
 
 You might be skeptical of using synthetic data. After all, it’s not real data, so how can it be a good proxy? In my experience, it works surprisingly well. Some of my favorite AI products, like [Hex](https://hex.tech/) use synthetic data to power their evals:
 
 > “LLMs are surprisingly good at generating excellent - and diverse - examples of user prompts. This can be relevant for powering application features, and sneakily, for building Evals. If this sounds a bit like the Large Language Snake is eating its tail, I was just as surprised as you! All I can say is: it works, ship it.” _[Bryan Bischof](https://www.linkedin.com/in/bryan-bischof/), Head of AI Engineering at Hex_
 
-### Next Steps [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#next-steps-1)
+### Next Steps [Anchor](https://hamel.dev/blog/posts/llm-judge/\#next-steps-1)
 
 With your dataset ready, now comes the most important part: getting your principal domain expert to evaluate the interactions.
 
-## Step 3: Direct The Domain Expert to Make Pass/Fail Judgments with Critiques [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#step-3-direct-the-domain-expert-to-make-passfail-judgments-with-critiques)
+## Step 3: Direct The Domain Expert to Make Pass/Fail Judgments with Critiques [Anchor](https://hamel.dev/blog/posts/llm-judge/\#step-3-direct-the-domain-expert-to-make-passfail-judgments-with-critiques)
 
 The domain expert’s job is to focus on one thing: **“Did the AI achieve the desired outcome?”** No complex scoring scales or multiple metrics. Just a clear **pass or fail** decision. In addition to the pass/fail decision, the domain expert should write a critique that explains their reasoning.
 
-### Why are simple pass/fail metrics important? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#why-are-simple-passfail-metrics-important)
+### Why are simple pass/fail metrics important? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#why-are-simple-passfail-metrics-important)
 
 - **Clarity and Focus**: A binary decision forces everyone to consider what truly matters. It simplifies the evaluation to a single, crucial question.
 
@@ -179,7 +179,7 @@ The domain expert’s job is to focus on one thing: **“Did the AI achieve the 
 - **Efficient Use of Resources**: Keeps the evaluation process manageable, especially when starting out. You avoid getting bogged down in detailed metrics that might not be meaningful yet.
 
 
-### The Role of Critiques [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#the-role-of-critiques)
+### The Role of Critiques [Anchor](https://hamel.dev/blog/posts/llm-judge/\#the-role-of-critiques)
 
 Alongside a binary pass/fail judgment, it’s important to write a detailed critique of the LLM-generated output. These critiques:
 
@@ -196,7 +196,7 @@ In practice, domain experts may not have fully internalized all the judgment cri
 
 _“But my problem is complex!”_ Trust me—starting simple forces you to focus on what truly matters. You can introduce more complexity later if needed.
 
-### Examples of Good Critiques [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#examples-of-good-critiques)
+### Examples of Good Critiques [Anchor](https://hamel.dev/blog/posts/llm-judge/\#examples-of-good-critiques)
 
 To illustrate how simple pass/fail judgments combined with detailed critiques work in practice, here’s a table showcasing examples of user interactions with an AI assistant. The table includes both **passes** and **fails**, with critiques explaining why the AI received that judgment. In cases where the AI passed despite critical issues, the critique highlights these aspects and justifies why it still passed overall. For failed interactions, the critique explains the critical elements that led to the failure.
 
@@ -221,7 +221,7 @@ Note
 
 At this point, you don’t need to perform a root cause analysis into the technical reasons behind why the AI failed. Many times, it’s useful to get a sense of overall behavior before diving into the weeds.
 
-### Don’t stray from binary pass/fail judgments when starting out [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#dont-stray-from-binary-passfail-judgments-when-starting-out)
+### Don’t stray from binary pass/fail judgments when starting out [Anchor](https://hamel.dev/blog/posts/llm-judge/\#dont-stray-from-binary-passfail-judgments-when-starting-out)
 
 A common mistake is straying from binary pass/fail judgments. Let’s revisit the dashboard from earlier:
 
@@ -241,7 +241,7 @@ This is why I hate off the shelf metrics that come with many evaluation framewor
 
 I can guarantee you that if someone says you need to measure 8 things on a 1-5 scale, they don’t know what they are looking for. They are just guessing. You have to let the domain expert drive and make a pass/fail judgment with critiques so you can figure out what truly matters. Stand your ground here.
 
-### Make it easy for the domain expert to review data [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#make-it-easy-for-the-domain-expert-to-review-data)
+### Make it easy for the domain expert to review data [Anchor](https://hamel.dev/blog/posts/llm-judge/\#make-it-easy-for-the-domain-expert-to-review-data)
 
 Finally, you need to remove all friction from reviewing data. I’ve written about this [here](https://hamel.dev/notes/llm/finetuning/data_cleaning.html). Sometimes, you can just use a spreadsheet. It’s a judgement call in terms of what is easiest for the domain expert. I found that I often have to provide additional context to help the domain expert understand the user interaction, such as:
 
@@ -251,27 +251,27 @@ Finally, you need to remove all friction from reviewing data. I’ve written abo
 
 All of this data needs to be presented on a single screen so the domain expert can review it without jumping through hoops. That’s why I recommend building [a simple web app](https://hamel.dev/notes/llm/finetuning/data_cleaning.html) to review data.
 
-### How many examples do you need? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#how-many-examples-do-you-need)
+### How many examples do you need? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#how-many-examples-do-you-need)
 
 The number of examples you need depends on the complexity of the task. My heuristic is that I start with around 30 examples and keep going until I do not see any new failure modes. From there, I keep going until I’m not learning anything new.
 
 Next, we’ll look at how to use this data to build an LLM judge.
 
-## Step 4: Fix Errors [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#step-4-fix-errors)
+## Step 4: Fix Errors [Anchor](https://hamel.dev/blog/posts/llm-judge/\#step-4-fix-errors)
 
 After looking at the data, it’s likely you will find errors in your AI system. Instead of plowing ahead and building an LLM judge, you want to fix any obvious errors. Remember, the whole point of the LLM as a judge is to help you find these errors, so it’s totally fine if you find them earlier!
 
 If you have already developed [Level 1 evals as outlined in my previous post](https://hamel.dev/blog/posts/evals), you should not have any pervasive errors. However, these errors can sometimes slip through the cracks. If you find pervasive errors, fix them and go back to step 3. Keep iterating until you feel like you have stabilized your system.
 
-## Step 5: Build Your LLM as A Judge, Iteratively [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#step-5-build-your-llm-as-a-judge-iteratively)
+## Step 5: Build Your LLM as A Judge, Iteratively [Anchor](https://hamel.dev/blog/posts/llm-judge/\#step-5-build-your-llm-as-a-judge-iteratively)
 
-### The Hidden Power of Critiques [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#the-hidden-power-of-critiques)
+### The Hidden Power of Critiques [Anchor](https://hamel.dev/blog/posts/llm-judge/\#the-hidden-power-of-critiques)
 
 You cannot write a good judge prompt until you’ve seen the data. [The paper from Shankar et al.,](https://arxiv.org/abs/2404.12272) “Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Preferences” summarizes this well:
 
 > to grade outputs,people need to externalize and define their evaluation criteria; however, the process of grading outputs helps them to define that very criteria. We dub this phenomenon criteria drift, and it implies thatit is impossible to completely determine evaluation criteria prior to human judging of LLM outputs.
 
-### Start with Expert Examples [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#start-with-expert-examples)
+### Start with Expert Examples [Anchor](https://hamel.dev/blog/posts/llm-judge/\#start-with-expert-examples)
 
 Let me share a real-world example of building an LLM judge you can apply to your own use case. When I was helping Honeycomb build their [Query Assistant feature](https://www.honeycomb.io/blog/introducing-query-assistant), we needed a way to evaluate if the AI was generating good queries. Here’s what our LLM judge prompt looked like, including few-shot examples of critiques from our domain expert, [Phillip](https://x.com/_cartermp):
 
@@ -370,7 +370,7 @@ Notice how each example includes:
 
 In the prompt above, the example critiques are fixed. An advanced approach is to include examples dynamically based upon the item you are judging. You can learn more in [this post about Continual In-Context Learning](https://blog.langchain.dev/dosu-langsmith-no-prompt-eng/).
 
-### Keep Iterating on the Prompt Until Convergence With Domain Expert [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#keep-iterating-on-the-prompt-until-convergence-with-domain-expert)
+### Keep Iterating on the Prompt Until Convergence With Domain Expert [Anchor](https://hamel.dev/blog/posts/llm-judge/\#keep-iterating-on-the-prompt-until-convergence-with-domain-expert)
 
 In this case, I used a low-tech approach to iterate on the prompt. I sent Phillip a spreadsheet with the following information:
 
@@ -389,13 +389,13 @@ I also tracked agreement rates over time to ensure we were converging on a good 
 
 It took us only three iterations to achieve > 90% agreement between the LLM and Phillip. Your mileage may vary depending on the complexity of the task. For example, [Swyx has conducted a similar process hundreds of times](https://humanloop.com/blog/why-your-product-needs-evals) for [AI News](https://www.latent.space/), an [extremely popular](https://x.com/swyx/status/1672306744884887553) news aggregator with high quality recommendations. The quality of the AI owing to this process is why this product has received [critical acclaim](https://buttondown.com/ainews).
 
-### How to Optimize the LLM Judge Prompt? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#how-to-optimize-the-llm-judge-prompt)
+### How to Optimize the LLM Judge Prompt? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#how-to-optimize-the-llm-judge-prompt)
 
 I usually adjust the prompts by hand. I haven’t had much luck with prompt optimizers like DSPy. However, my friend [Eugene Yan](https://eugeneyan.com/) has just released a promising tool named [ALIGN Eval](https://eugeneyan.com/writing/aligneval/). I like it because it’s simple and effective. Also, don’t forget the approach of [continual in-context learning](https://blog.langchain.dev/dosu-langsmith-no-prompt-eng/) mentioned earlier - it can be effective when implemented correctly.
 
 In rare cases, I might fine-tune a judge, but I prefer not to. I talk about this more in the [FAQ](https://hamel.dev/blog/posts/llm-judge/#do-you-recommend-fine-tuning-judges) section.
 
-### The Human Side of the Process [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#the-human-side-of-the-process)
+### The Human Side of the Process [Anchor](https://hamel.dev/blog/posts/llm-judge/\#the-human-side-of-the-process)
 
 Something unexpected happened during this process. [Phillip Carter](https://www.linkedin.com/in/phillip-carter-4714a135/), our domain expert at Honeycomb, found that reviewing the LLM’s critiques helped him articulate his own evaluation criteria more clearly. He said,
 
@@ -405,11 +405,11 @@ This is a pattern I’ve seen repeatedly—the process of building an LLM judge 
 
 Furthermore, because this process forces the domain expert to look at data carefully, I always uncover new insights about the product, AI capabilities, and user needs. The resulting benefits are often _more valuable_ than creating a LLM judge!
 
-### How Often Should You Evaluate? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#how-often-should-you-evaluate)
+### How Often Should You Evaluate? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#how-often-should-you-evaluate)
 
 I conduct this human review at regular intervals and whenever something material changes. For example, if I update a model, I’ll run the process again. I don’t get too scientific here; instead, I rely on my best judgment. Also note that after the first two iterations, I tend to focus more on errors rather than sampling randomly. For example, if I find an error, I’ll search for more examples that I think might trigger the same error. However, I always do a bit of random sampling as well.
 
-### What if this doesn’t work? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#what-if-this-doesnt-work)
+### What if this doesn’t work? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#what-if-this-doesnt-work)
 
 I’ve seen this process fail when:
 
@@ -419,7 +419,7 @@ I’ve seen this process fail when:
 
 In each of these cases, I try to address the root cause instead of trying to force alignment. Sometimes, you may not be able to achieve the alignment you want and may have to lean heavier on human annotations. However, after following the process described here, you will have metrics that help you understand how much you can trust the LLM judge.
 
-### Mistakes I’ve noticed in LLM judge prompts [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#mistakes-ive-noticed-in-llm-judge-prompts)
+### Mistakes I’ve noticed in LLM judge prompts [Anchor](https://hamel.dev/blog/posts/llm-judge/\#mistakes-ive-noticed-in-llm-judge-prompts)
 
 Most of the mistakes I’ve seen in LLM judge prompts have to do with not providing good examples:
 
@@ -430,7 +430,7 @@ Most of the mistakes I’ve seen in LLM judge prompts have to do with not provid
 
 Sometimes, you may encounter difficulties with fitting everything you need into the prompt, and may have to get creative about how you structure the examples. However, this is becoming less of an issue thanks to expanding context windows and [prompt caching](https://platform.openai.com/docs/guides/prompt-caching).
 
-## Step 6: Perform Error Analysis [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#step-6-perform-error-analysis)
+## Step 6: Perform Error Analysis [Anchor](https://hamel.dev/blog/posts/llm-judge/\#step-6-perform-error-analysis)
 
 After you have created a LLM as a judge, you will have a dataset of user interactions with the AI, and the LLM’s judgments. If your metrics show an acceptable agreement between the domain expert and the LLM judge, you can apply this judge against real or synthetic interactions. After this, you can you calculate error rates for different dimensions of your data. You should calculate the error on unseen data only to make sure your aren’t getting biased results.
 
@@ -447,7 +447,7 @@ For example, if you have segmented your data by persona, scenario, feature, etc,
 | Contact Search | No Matches | New User | 25 | 68.0% |
 | Contact Search | No Matches | Expert User | 28 | 21.4% |
 
-### Classify Traces [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#classify-traces)
+### Classify Traces [Anchor](https://hamel.dev/blog/posts/llm-judge/\#classify-traces)
 
 Once you know where the errors are now you can perform an error analysis to get to the root cause of the errors. My favorite way is to look at examples of each type of error and classify them by hand. I recommend using a spreadsheet for this. For example, a trace for Order tracking where there are no matches for new users might look like this:
 
@@ -500,7 +500,7 @@ In this case, you might classify the error as: `Missing User Education`. The sys
 
 Now you know where to focus your efforts. This doesn’t have to take an extraordinary amount of time. You can get quite far in just 15 minutes. Also, you can use a LLM to help you with this classification, but that is beyond the scope of this post (you can use a LLM to help you do anything in this post, as long as you have a process to verify the results).
 
-### An Interactive Walkthrough of Error Analysis [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#an-interactive-walkthrough-of-error-analysis)
+### An Interactive Walkthrough of Error Analysis [Anchor](https://hamel.dev/blog/posts/llm-judge/\#an-interactive-walkthrough-of-error-analysis)
 
 Error analysis has been around in Machine Learning for quite some time. This video by Andrew Ng does a great job of walking through the process interactively:
 
@@ -553,21 +553,21 @@ Watch on
 
 •
 
-### Fix Your Errors, Again [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#fix-your-errors-again)
+### Fix Your Errors, Again [Anchor](https://hamel.dev/blog/posts/llm-judge/\#fix-your-errors-again)
 
 Now that you have a sense of the errors, you can go back and fix them again. Go back to step 3 and iterate until you are satisfied. Note that every time you fix an error, you should try to write a test case for it. Sometimes, this can be an assertion in your test suite, but other times you may need to create a more “specialized” LLM judge for these failures. We’ll talk about this next.
 
-### Doing this well requires data literacy [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#doing-this-well-requires-data-literacy)
+### Doing this well requires data literacy [Anchor](https://hamel.dev/blog/posts/llm-judge/\#doing-this-well-requires-data-literacy)
 
 Investigating your data is much harder in practice than I made it look in this post. It requires a nose for data that only comes from practice. It also helps to have some basic familiarity with statistics and data analysis tools. My favorite post on data literacy is [this one](https://jxnl.co/writing/2024/06/02/10-ways-to-be-data-illiterate-and-how-to-avoid-them/) by Jason Liu and Eugene Yan.
 
-## Step 7: Create More Specialized LLM Judges (if needed) [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#step-7-create-more-specialized-llm-judges-if-needed)
+## Step 7: Create More Specialized LLM Judges (if needed) [Anchor](https://hamel.dev/blog/posts/llm-judge/\#step-7-create-more-specialized-llm-judges-if-needed)
 
 Now that you have a sense for where the problems in your AI are, you can decide where and if to invest in more targeted LLM judges. For example, if you find that the AI has trouble with citing sources correctly, you can created a targeted eval for that. You might not even need a LLM judge for some errors (and use a code-based assertion instead).
 
 The key takeaway is don’t jump directly to using specialized LLM judges until you have gone through this critique shadowing process. This will help you rationalize where to invest your time.
 
-## Recap of Critique Shadowing [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#recap-of-critique-shadowing)
+## Recap of Critique Shadowing [Anchor](https://hamel.dev/blog/posts/llm-judge/\#recap-of-critique-shadowing)
 
 Using an LLM as a judge can streamline your AI evaluation process if approached correctly. Here’s a visual illustration of the process (there is a description of the process below the diagram as well):
 
@@ -638,13 +638,13 @@ The Critique Shadowing process is iterative, with feedback loops. Let’s list o
 
 This process never truly ends. It repeats periodically or when material changes occur.
 
-### It’s Not The Judge That Created Value, After all [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#its-not-the-judge-that-created-value-after-all)
+### It’s Not The Judge That Created Value, After all [Anchor](https://hamel.dev/blog/posts/llm-judge/\#its-not-the-judge-that-created-value-after-all)
 
 The real value of this process is looking at your data and doing careful analysis. Even though an AI judge can be a helpful tool, going through this process is what drives results. I would go as far as saying that creating a LLM judge is a nice “hack” I use to trick people into carefully looking at their data!
 
 That’s right. The real business value comes from looking at your data. But hey, potato, potahto.
 
-### Do You Really Need This? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#do-you-really-need-this)
+### Do You Really Need This? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#do-you-really-need-this)
 
 Phew, this seems like a lot of work! Do you really need this? Well, it depends. There are cases where you can take a shortcut through this process. For example, let’s say:
 
@@ -656,17 +656,17 @@ In this scenario, you can jump directly to something that looks like step 3 and 
 
 However, you can never completely eliminate looking at your data! This is precisely the step that most people skip. Don’t be that person.
 
-## FAQ [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#faq)
+## FAQ [Anchor](https://hamel.dev/blog/posts/llm-judge/\#faq)
 
 I received [a lot of questions](https://x.com/HamelHusain/status/1850256204553244713) about this topic. Here are answers to the most common ones:
 
-### If I have a good judge LLM, isn’t that also the LLM I’d also want to use? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#if-i-have-a-good-judge-llm-isnt-that-also-the-llm-id-also-want-to-use)
+### If I have a good judge LLM, isn’t that also the LLM I’d also want to use? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#if-i-have-a-good-judge-llm-isnt-that-also-the-llm-id-also-want-to-use)
 
 Effective judges often use larger models or more compute (via longer prompts, chain-of-thought, etc.) than the systems they evaluate.
 
 However, If the cost of the most powerful LLM is not prohibitive, and latency is not an issue, then you might want to consider where you invest your efforts differently. In this case, it might make sense to put more effort towards specialist LLM judges, [code-based assertions, and A/B testing](https://hamel.dev/blog/posts/evals/#the-types-of-evaluation). However, you should still go through the process of looking at data and critiquing the LLM’s output before you adopt specialized judges.
 
-### Do you recommend fine-tuning judges? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#do-you-recommend-fine-tuning-judges)
+### Do you recommend fine-tuning judges? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#do-you-recommend-fine-tuning-judges)
 
 I prefer not to fine-tune LLM judges. I’d rather spend the effort fine-tuning the actual LLM instead. However, fine-tuning guardrails or other specialized judges can be useful (especially if they are small classifiers).
 
@@ -678,43 +678,43 @@ As a related note, you can leverage a LLM judge to curate and transform data for
 
 Using a LLM judge for enhancing fine-tuning data is even more compelling when you are trying to [distill a large LLM into a smaller one](https://openai.com/index/api-model-distillation/). The details of fine-tuning are beyond the scope of this post. If you are interested in learning more, see [these resources](https://parlance-labs.com/education/#fine-tuning).
 
-### What’s wrong with off-the-shelf LLM judges? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#whats-wrong-with-off-the-shelf-llm-judges)
+### What’s wrong with off-the-shelf LLM judges? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#whats-wrong-with-off-the-shelf-llm-judges)
 
 Nothing is strictly wrong with them. It’s just that many people are led astray by them. If you are disciplined you can apply them to your data and see if they are telling you something valuable. However, I’ve found that these tend to cause more confusion than value.
 
-### How Do you evaluate the LLM judge? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#how-do-you-evaluate-the-llm-judge)
+### How Do you evaluate the LLM judge? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#how-do-you-evaluate-the-llm-judge)
 
 You will collect metrics on the agreement between the domain expert and the LLM judge. This tells you how much you can trust the judge and in what scenarios. Your domain expert doesn’t have to inspect every single example, you just need a representative sample so you can have reliable statistics.
 
-### What model do you use for the LLM judge? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#what-model-do-you-use-for-the-llm-judge)
+### What model do you use for the LLM judge? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#what-model-do-you-use-for-the-llm-judge)
 
 For the kind of judge articulated in this blog post, I like to use the most powerful model I can afford in my cost/latency budget. This budget might be different than my primary model, depending on the number of examples I need to score. This can vary significantly according to the use case.
 
-### What about guardrails? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#what-about-guardrails)
+### What about guardrails? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#what-about-guardrails)
 
 Guardrails are a separate but related topic. They are a way to prevent the LLM from saying/doing something harmful or inappropriate. This blog post focuses on helping you create a judge that’s aligned with business goals, especially when starting out.
 
-### I’m using LLM as a judge, and getting tremendous value but I didn’t follow this approach. [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#im-using-llm-as-a-judge-and-getting-tremendous-value-but-i-didnt-follow-this-approach.)
+### I’m using LLM as a judge, and getting tremendous value but I didn’t follow this approach. [Anchor](https://hamel.dev/blog/posts/llm-judge/\#im-using-llm-as-a-judge-and-getting-tremendous-value-but-i-didnt-follow-this-approach.)
 
 I believe you. This blog post is not the only way to use a LLM as a judge. In fact, I’ve seen people use a LLM as a judge in all sorts of creative ways, which include ranking, classification, model selection and so-on. I’m focused on an approach that works well when you are getting started, and avoids the pitfalls of confusing metric sprawl. However, the general process of looking at the data is still central no matter what kind of judge you are building.
 
-### How do you choose between traditional ML techniques, LLM-as-a-judge and human annotations? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#how-do-you-choose-between-traditional-ml-techniques-llm-as-a-judge-and-human-annotations)
+### How do you choose between traditional ML techniques, LLM-as-a-judge and human annotations? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#how-do-you-choose-between-traditional-ml-techniques-llm-as-a-judge-and-human-annotations)
 
 The answer to this (and many other questions) is: do the simplest thing that works. And simple doesn’t always mean traditional ML techniques. Depending on your situation, it might be easier to use a LLM API as a classifier than to train a model and deploy it.
 
-### Can you make judges from small models? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#can-you-make-judges-from-small-models)
+### Can you make judges from small models? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#can-you-make-judges-from-small-models)
 
 Yes, potentially. I’ve only used the larger models for judges. You have to base the answer to this question on the data (i.e. the agreement with the domain expert).
 
-### How do you ensure consistency when updating your LLM model? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#how-do-you-ensure-consistency-when-updating-your-llm-model)
+### How do you ensure consistency when updating your LLM model? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#how-do-you-ensure-consistency-when-updating-your-llm-model)
 
 You have to go through the process again and measure the results.
 
-### How do you phase out human in the loop to scale this? [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#how-do-you-phase-out-human-in-the-loop-to-scale-this)
+### How do you phase out human in the loop to scale this? [Anchor](https://hamel.dev/blog/posts/llm-judge/\#how-do-you-phase-out-human-in-the-loop-to-scale-this)
 
 You don’t need a domain expert to grade every single example. You just need a representative sample. I don’t think you can eliminate humans completely, because the LLM still needs to be aligned to something, and that something is usually a human. As your evaluation system gets better, it naturally reduces the amount of human effort required.
 
-## Resources [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#resources)
+## Resources [Anchor](https://hamel.dev/blog/posts/llm-judge/\#resources)
 
 These are some of the resources I recommend to learn more on this topic:
 
@@ -728,7 +728,7 @@ These are some of the resources I recommend to learn more on this topic:
 - [How Dosu Used LangSmith to Achieve a 30% Accuracy Improvement with No Prompt Engineering](https://blog.langchain.dev/dosu-langsmith-no-prompt-eng/) by Langchain shows a nice approach to building LLM prompts with dynamic examples. The idea is simple, but effective. I’ve been adapting it for my own use cases, including LLM judges. Here is a [video walkthrough](https://www.youtube.com/watch?v=tHZtq_pJSGo) of the approach.
 - [What We’ve Learned From A Year of Building with LLMs](https://applied-llms.org/): is a great overview of many practical aspects of building with LLMs, with an emphasis on the importance of evaluation.
 
-## Stay Connected [Anchor](https://hamel.dev/blog/posts/llm-judge/index.html\#stay-connected)
+## Stay Connected [Anchor](https://hamel.dev/blog/posts/llm-judge/\#stay-connected)
 
 I’m continuously learning about LLMs, and enjoy sharing my findings. If you’re interested in this journey, consider subscribing.
 

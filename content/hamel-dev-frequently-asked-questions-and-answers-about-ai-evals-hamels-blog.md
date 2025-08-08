@@ -1,9 +1,9 @@
 ---
 title: "Frequently Asked Questions (And Answers) About AI Evals \u2013 Hamel\u2019\
   s Blog"
-source_url: https://hamel.dev/blog/posts/evals-faq/
+source_url: https://hamel.dev/blog/posts/evals-faq
 source_domain: hamel.dev
-date_fetched: '2025-08-08T06:31:17.407972+00:00'
+date_fetched: '2025-08-08T08:07:02.548625+00:00'
 hash: 0ced771feff396e9626521ea46d7f3ca28ae3f44870b6853267acd173d394e4c
 ---
 

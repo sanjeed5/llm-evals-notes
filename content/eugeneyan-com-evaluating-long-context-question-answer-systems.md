@@ -1,8 +1,8 @@
 ---
 title: Evaluating Long-Context Question & Answer Systems
-source_url: https://eugeneyan.com/writing/qa-evals/
+source_url: https://eugeneyan.com/writing/qa-evals
 source_domain: eugeneyan.com
-date_fetched: '2025-08-08T07:18:44.409321+00:00'
+date_fetched: '2025-08-08T08:06:43.181083+00:00'
 hash: 13820286379d37f4d7793dd72710c4d5331e8e186d88db3e8fd19a40077cb2b7
 ---
 

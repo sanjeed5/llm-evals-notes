@@ -1,8 +1,8 @@
 ---
 title: There Are Only 6 RAG Evals - Jason Liu
-source_url: https://jxnl.co/writing/2025/05/19/there-are-only-6-rag-evals/
+source_url: https://jxnl.co/writing/2025/05/19/there-are-only-6-rag-evals
 source_domain: jxnl.co
-date_fetched: '2025-08-08T06:31:31.296062+00:00'
+date_fetched: '2025-08-08T08:07:13.197850+00:00'
 hash: d8349dc18ef31700347a2fa453536fa742c84d42a6e8f379b6d1cb0a703a3442
 ---
 
